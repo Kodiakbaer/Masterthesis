@@ -6,17 +6,17 @@ def empty(a):
     pass
 
 
-imPath = "Resources/TestWall.png"
+imPath = "Resources/Stifte.PNG"
 img = cv2.imread(imPath)
-imgResize = cv2.resize(img, (960, 516))
+imgResize = cv2.resize(img, (640, 480))
 cv2.namedWindow("TrackBars")
 cv2.resizeWindow("TrackBars", 640,240)
-cv2.createTrackbar("Hue Min", "TrackBars", 155, 179, empty)
-cv2.createTrackbar("Hue Max", "TrackBars", 170, 179, empty)
-cv2.createTrackbar("Sat Min", "TrackBars", 125, 255, empty)
+cv2.createTrackbar("Hue Min", "TrackBars", 90, 255, empty)
+cv2.createTrackbar("Hue Max", "TrackBars", 115, 255, empty)
+cv2.createTrackbar("Sat Min", "TrackBars", 230, 255, empty)
 cv2.createTrackbar("Sat Max", "TrackBars", 255, 255, empty)
-cv2.createTrackbar("Val Min", "TrackBars", 105, 255, empty)
-cv2.createTrackbar("Val Max", "TrackBars", 255, 255, empty)
+cv2.createTrackbar("Val Min", "TrackBars", 25, 255, empty)
+cv2.createTrackbar("Val Max", "TrackBars", 200, 255, empty)
 
 while True:
 
@@ -42,6 +42,7 @@ while True:
     #cv2.imshow("Mask Image", mask)
     #cv2.imshow("Result Image", imgResult)
     cv2.imshow("Results", imgVer)
+    cv2.imshow("Maske", mask)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
