@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="70eee28b-38d1-4623-a1e3-d65267f6b42f" name="Default Changelist" comment="Commit of all the Tutorial Chapters" />
+    <list default="true" id="70eee28b-38d1-4623-a1e3-d65267f6b42f" name="Default Changelist" comment="Commit of all the Tutorial Chapters">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -221,7 +223,7 @@
       <workItem from="1599048814266" duration="679000" />
       <workItem from="1600771790517" duration="11810000" />
       <workItem from="1600852685894" duration="11557000" />
-      <workItem from="1600941308932" duration="1704000" />
+      <workItem from="1600941308932" duration="3012000" />
     </task>
     <task id="LOCAL-00001" summary="This is a Test commit for my Python file">
       <created>1598879594831</created>
@@ -244,7 +246,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600943134043</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Commit of all the Tutorial Chapters">
+      <created>1600943740940</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1600943740940</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -303,10 +312,10 @@
     </state>
     <state x="281" y="215" key="SettingsEditor/0.0.1920.1160@0.0.1920.1160" timestamp="1599048897311" />
     <state x="1373" y="199" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1600772417673" />
-    <state x="1512" y="429" key="Vcs.Push.Dialog.v2" timestamp="1600943139223">
+    <state x="1512" y="429" key="Vcs.Push.Dialog.v2" timestamp="1600943773423">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1512" y="429" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1600943139223" />
+    <state x="1512" y="429" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1600943773423" />
     <state x="1707" y="389" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1600855565861">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
