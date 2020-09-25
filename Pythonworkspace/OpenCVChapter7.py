@@ -6,7 +6,7 @@ def empty(a):
     pass
 
 
-imPath = "Resources/Stifte.PNG"
+imPath = "Resources/Stifte2.jpg"
 img = cv2.imread(imPath)
 imgResize = cv2.resize(img, (640, 480))
 cv2.namedWindow("TrackBars")
