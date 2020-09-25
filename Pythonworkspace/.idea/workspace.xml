@@ -19,10 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="70eee28b-38d1-4623-a1e3-d65267f6b42f" name="Default Changelist" comment="Commit of all the Tutorial Chapters">
+    <list default="true" id="70eee28b-38d1-4623-a1e3-d65267f6b42f" name="Default Changelist" comment="Commit of Project1.py">
+      <change afterPath="$PROJECT_DIR$/Project2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenCVChapter7.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenCVChapter7.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project1.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +62,7 @@
       <recent name="D:\Studium\Master\MasterArbeit\GitHubRepository\Masterthesis\Pythonworkspace" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Project1">
+  <component name="RunManager" selected="Python.Project2">
     <configuration name="OpenCVChapter2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="PythonWorkspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -100,28 +99,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OpenCVChapter7.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="OpenCVChapter8" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="PythonWorkspace" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OpenCVChapter8.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -174,6 +151,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Project2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PythonWorkspace" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Project2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="PythonMasterThesis" type="PythonConfigurationType" factoryName="Python">
       <module name="PythonWorkspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -198,11 +197,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Project2" />
         <item itemvalue="Python.Project1" />
         <item itemvalue="Python.OpenCVChapter7" />
         <item itemvalue="Python.OpenCVChapter9" />
         <item itemvalue="Python.OpenCVChapter2" />
-        <item itemvalue="Python.OpenCVChapter8" />
       </list>
     </recent_temporary>
   </component>
@@ -229,7 +228,7 @@
       <workItem from="1600948672498" duration="6601000" />
       <workItem from="1600956158617" duration="40000" />
       <workItem from="1600975873420" duration="261000" />
-      <workItem from="1601028516310" duration="4887000" />
+      <workItem from="1601028516310" duration="10408000" />
     </task>
     <task id="LOCAL-00001" summary="This is a Test commit for my Python file">
       <created>1598879594831</created>
@@ -273,7 +272,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600947488084</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Commit of Project1.py">
+      <created>1601033463017</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1601033463017</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -295,7 +301,8 @@
     <MESSAGE value="This is a Test commit for my Python file" />
     <MESSAGE value="This is a second Test commit for my Python file" />
     <MESSAGE value="Commit of all the Tutorial Chapters" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit of all the Tutorial Chapters" />
+    <MESSAGE value="Commit of Project1.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit of Project1.py" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1357" y="293" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600771872662">
@@ -311,30 +318,30 @@
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="740" y="335" key="FileChooserDialogImpl/0.0.1920.1160@0.0.1920.1160" timestamp="1598880025615" />
-    <state width="1236" height="389" key="GridCell.Tab.0.bottom" timestamp="1601032742811">
+    <state width="1236" height="389" key="GridCell.Tab.0.bottom" timestamp="1601049888945">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="303" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600955433180" />
     <state width="1877" height="315" key="GridCell.Tab.0.bottom/0.0.1920.1160@0.0.1920.1160" timestamp="1598880098590" />
-    <state width="1236" height="389" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1601032742811" />
-    <state width="1236" height="389" key="GridCell.Tab.0.center" timestamp="1601032742811">
+    <state width="1236" height="389" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1601049888945" />
+    <state width="1236" height="389" key="GridCell.Tab.0.center" timestamp="1601049888945">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="303" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600955433180" />
     <state width="1877" height="315" key="GridCell.Tab.0.center/0.0.1920.1160@0.0.1920.1160" timestamp="1598880098590" />
-    <state width="1236" height="389" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1601032742811" />
-    <state width="1236" height="389" key="GridCell.Tab.0.left" timestamp="1601032742811">
+    <state width="1236" height="389" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1601049888945" />
+    <state width="1236" height="389" key="GridCell.Tab.0.left" timestamp="1601049888945">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="303" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600955433180" />
     <state width="1877" height="315" key="GridCell.Tab.0.left/0.0.1920.1160@0.0.1920.1160" timestamp="1598880098590" />
-    <state width="1236" height="389" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1601032742811" />
-    <state width="1236" height="389" key="GridCell.Tab.0.right" timestamp="1601032742811">
+    <state width="1236" height="389" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1601049888945" />
+    <state width="1236" height="389" key="GridCell.Tab.0.right" timestamp="1601049888945">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="303" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600955433180" />
     <state width="1877" height="315" key="GridCell.Tab.0.right/0.0.1920.1160@0.0.1920.1160" timestamp="1598880098590" />
-    <state width="1236" height="389" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1601032742811" />
+    <state width="1236" height="389" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1601049888945" />
     <state width="618" height="487" key="GridCell.Tab.1.bottom" timestamp="1601032419378">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -356,10 +363,10 @@
     </state>
     <state x="281" y="215" key="SettingsEditor/0.0.1920.1160@0.0.1920.1160" timestamp="1599048897311" />
     <state x="1373" y="199" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1600948312028" />
-    <state x="1512" y="429" key="Vcs.Push.Dialog.v2" timestamp="1600947497024">
+    <state x="1512" y="429" key="Vcs.Push.Dialog.v2" timestamp="1601033470600">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1512" y="429" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1600947497024" />
+    <state x="1512" y="429" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1601033470600" />
     <state x="1707" y="389" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1600855565861">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -373,14 +380,15 @@
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter8.coverage" NAME="OpenCVChapter8 Coverage Results" MODIFIED="1600865574278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter5.coverage" NAME="OpenCVChapter5 Coverage Results" MODIFIED="1600792993379" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$PythonMasterThesis.coverage" NAME="PythonMasterThesis Coverage Results" MODIFIED="1598880061805" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter2.coverage" NAME="OpenCVChapter2 Coverage Results" MODIFIED="1600948699199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pythonworkspace$Project2.coverage" NAME="Project2 Coverage Results" MODIFIED="1601049888941" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter7.coverage" NAME="OpenCVChapter7 Coverage Results" MODIFIED="1601029318826" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter3.coverage" NAME="OpenCVChapter3 Coverage Results" MODIFIED="1600789687661" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pythonworkspace$Project1.coverage" NAME="Project1 Coverage Results" MODIFIED="1601032742806" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter6.coverage" NAME="OpenCVChapter6 Coverage Results" MODIFIED="1600801180260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter2__1_.coverage" NAME="OpenCVChapter2 (1) Coverage Results" MODIFIED="1600788382201" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter4.coverage" NAME="OpenCVChapter4 Coverage Results" MODIFIED="1600791636241" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter2.coverage" NAME="OpenCVChapter2 Coverage Results" MODIFIED="1600948699199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter9.coverage" NAME="OpenCVChapter9 Coverage Results" MODIFIED="1600948720084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter7.coverage" NAME="OpenCVChapter7 Coverage Results" MODIFIED="1601029318826" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter3.coverage" NAME="OpenCVChapter3 Coverage Results" MODIFIED="1600789687661" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter1.coverage" NAME="OpenCVChapter1 Coverage Results" MODIFIED="1600785518497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Pythonworkspace$Project1.coverage" NAME="Project1 Coverage Results" MODIFIED="1601032742806" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
