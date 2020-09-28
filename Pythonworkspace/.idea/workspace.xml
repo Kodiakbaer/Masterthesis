@@ -20,10 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="70eee28b-38d1-4623-a1e3-d65267f6b42f" name="Default Changelist" comment="Commit of Project1.py">
-      <change afterPath="$PROJECT_DIR$/Project3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resources/haarcascade_russian_plate_number.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CascadeTester" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Project2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Project2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources/haarcascade_frontalface_default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/haarcascades/haarcascade_frontalface_default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources/haarcascade_russian_plate_number.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/haarcascades/haarcascade_russian_plate_number.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,10 +61,33 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Studium\Master\MasterArbeit\GitHubRepository\Masterthesis\Pythonworkspace\Resources\haarcascades" />
       <recent name="D:\Studium\Master\MasterArbeit\GitHubRepository\Masterthesis\Pythonworkspace" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Project3">
+  <component name="RunManager" selected="Python.CascadeTester">
+    <configuration name="CascadeTester" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PythonWorkspace" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CascadeTester" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="OpenCVChapter7" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PythonWorkspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -79,28 +102,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OpenCVChapter7.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="OpenCVChapter9" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="PythonWorkspace" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OpenCVChapter9.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -199,11 +200,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.CascadeTester" />
         <item itemvalue="Python.Project3" />
         <item itemvalue="Python.Project2" />
         <item itemvalue="Python.Project1" />
         <item itemvalue="Python.OpenCVChapter7" />
-        <item itemvalue="Python.OpenCVChapter9" />
       </list>
     </recent_temporary>
   </component>
@@ -231,7 +232,8 @@
       <workItem from="1600956158617" duration="40000" />
       <workItem from="1600975873420" duration="261000" />
       <workItem from="1601028516310" duration="10424000" />
-      <workItem from="1601118205577" duration="6098000" />
+      <workItem from="1601118205577" duration="6749000" />
+      <workItem from="1601288904099" duration="7715000" />
     </task>
     <task id="LOCAL-00001" summary="This is a Test commit for my Python file">
       <created>1598879594831</created>
@@ -289,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601078328088</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Commit of Project1.py">
+      <created>1601128782134</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1601128782134</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -320,6 +329,10 @@
     </state>
     <state x="414" y="235" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1160@0.0.1920.1160" timestamp="1599048838433" />
     <state x="1357" y="293" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1600771872662" />
+    <state x="1667" y="490" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601289460058">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1667" y="490" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400@0.0.2560.1400" timestamp="1601289460058" />
     <state x="511" y="28" key="CommitChangelistDialog2" timestamp="1600955419620">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -328,55 +341,55 @@
       <screen x="0" y="0" width="1920" height="1160" />
     </state>
     <state x="740" y="335" key="FileChooserDialogImpl/0.0.1920.1160@0.0.1920.1160" timestamp="1598880025615" />
-    <state width="1236" height="383" key="GridCell.Tab.0.bottom" timestamp="1601124459495">
+    <state width="1236" height="383" key="GridCell.Tab.0.bottom" timestamp="1601294945769">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="303" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600955433180" />
     <state width="1877" height="315" key="GridCell.Tab.0.bottom/0.0.1920.1160@0.0.1920.1160" timestamp="1598880098590" />
-    <state width="1236" height="383" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1601124459495" />
-    <state width="1236" height="383" key="GridCell.Tab.0.center" timestamp="1601124459495">
+    <state width="1236" height="383" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1601294945769" />
+    <state width="1236" height="383" key="GridCell.Tab.0.center" timestamp="1601294945769">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="303" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600955433180" />
     <state width="1877" height="315" key="GridCell.Tab.0.center/0.0.1920.1160@0.0.1920.1160" timestamp="1598880098590" />
-    <state width="1236" height="383" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1601124459495" />
-    <state width="1236" height="383" key="GridCell.Tab.0.left" timestamp="1601124459495">
+    <state width="1236" height="383" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1601294945769" />
+    <state width="1236" height="383" key="GridCell.Tab.0.left" timestamp="1601294945769">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="303" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600955433180" />
     <state width="1877" height="315" key="GridCell.Tab.0.left/0.0.1920.1160@0.0.1920.1160" timestamp="1598880098590" />
-    <state width="1236" height="383" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1601124459495" />
-    <state width="1236" height="383" key="GridCell.Tab.0.right" timestamp="1601124459495">
+    <state width="1236" height="383" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1601294945769" />
+    <state width="1236" height="383" key="GridCell.Tab.0.right" timestamp="1601294945769">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1877" height="303" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600955433180" />
     <state width="1877" height="315" key="GridCell.Tab.0.right/0.0.1920.1160@0.0.1920.1160" timestamp="1598880098590" />
-    <state width="1236" height="383" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1601124459495" />
-    <state width="1236" height="480" key="GridCell.Tab.1.bottom" timestamp="1601120563413">
+    <state width="1236" height="383" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1601294945769" />
+    <state width="1236" height="480" key="GridCell.Tab.1.bottom" timestamp="1601158731047">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1236" height="480" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1601120563413" />
-    <state width="1236" height="480" key="GridCell.Tab.1.center" timestamp="1601120563413">
+    <state width="1236" height="480" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1601158731047" />
+    <state width="1236" height="480" key="GridCell.Tab.1.center" timestamp="1601158731047">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1236" height="480" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1601120563413" />
-    <state width="1236" height="480" key="GridCell.Tab.1.left" timestamp="1601120563412">
+    <state width="1236" height="480" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1601158731047" />
+    <state width="1236" height="480" key="GridCell.Tab.1.left" timestamp="1601158731047">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1236" height="480" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1601120563412" />
-    <state width="1236" height="480" key="GridCell.Tab.1.right" timestamp="1601120563413">
+    <state width="1236" height="480" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1601158731047" />
+    <state width="1236" height="480" key="GridCell.Tab.1.right" timestamp="1601158731047">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1236" height="480" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1601120563413" />
+    <state width="1236" height="480" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1601158731047" />
     <state x="1373" y="199" key="SettingsEditor" timestamp="1600948312028">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="281" y="215" key="SettingsEditor/0.0.1920.1160@0.0.1920.1160" timestamp="1599048897311" />
     <state x="1373" y="199" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1600948312028" />
-    <state x="1512" y="429" key="Vcs.Push.Dialog.v2" timestamp="1601123041473">
+    <state x="1512" y="429" key="Vcs.Push.Dialog.v2" timestamp="1601128831360">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1512" y="429" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1601123041473" />
+    <state x="1512" y="429" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1601128831360" />
     <state x="1707" y="389" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1600855565861">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -390,6 +403,7 @@
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter8.coverage" NAME="OpenCVChapter8 Coverage Results" MODIFIED="1600865574278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter5.coverage" NAME="OpenCVChapter5 Coverage Results" MODIFIED="1600792993379" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$PythonMasterThesis.coverage" NAME="PythonMasterThesis Coverage Results" MODIFIED="1598880061805" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pythonworkspace$CascadeTester.coverage" NAME="CascadeTester Coverage Results" MODIFIED="1601294945765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter2.coverage" NAME="OpenCVChapter2 Coverage Results" MODIFIED="1600948699199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$Project2.coverage" NAME="Project2 Coverage Results" MODIFIED="1601123145279" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter7.coverage" NAME="OpenCVChapter7 Coverage Results" MODIFIED="1601029318826" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
