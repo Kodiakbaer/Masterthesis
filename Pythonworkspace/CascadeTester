@@ -1,9 +1,9 @@
 import cv2
 
 ##############################################
-path = "Resources\haarcascades\haarcascade_lowerbody.xml"   # Path of the haarcascade
+path = "Resources\haarcascades\haarcascade_holdsV4.xml"   # Path of the haarcascade
 camNr = 0                           # Camera Number
-objectName = "Sexy boi"                 # Object Name to Display
+objectName = "Griff"                 # Object Name to Display
 frameWidth = 1240
 frameHeight = 960
 color = (255, 0, 255)
@@ -13,6 +13,7 @@ cap = cv2.VideoCapture(camNr)
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 
+# img = cv2.imread("Resources/TestWall.png")
 
 def empty(a):
     pass
@@ -20,10 +21,12 @@ def empty(a):
 # create Trackbar
 cv2.namedWindow("Result")
 cv2.resizeWindow("Result", frameWidth, frameHeight+100)
-cv2.createTrackbar("Scale", "Result", 200, 1000, empty)
-cv2.createTrackbar("Neighbours", "Result", 8, 20, empty)
-cv2.createTrackbar("Min Area", "Result", 20000, 100000, empty)
+cv2.createTrackbar("Scale", "Result", 10, 1000, empty)
+cv2.createTrackbar("Neighbours", "Result", 18, 20, empty)
+cv2.createTrackbar("Min Area", "Result", 100, 100000, empty)
+cv2.createTrackbar("Max Area", "Result", 10000, 100000, empty)
 cv2.createTrackbar("Brightness", "Result", 100, 255, empty)
+
 
 # Load the classifiers
 cascade = cv2.CascadeClassifier(path)
@@ -34,7 +37,8 @@ while True:
     cap.set(10, cameraBrightness)
 
     # get Camera Image amd convert to grayscale
-    success, img = cap.read()
+    # success, img = cap.read()                                         # Für video das entkommentieren
+    img = cv2.imread("Resources/TestWalls/TestWall.png")
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     # detect object using the cascade
@@ -46,7 +50,8 @@ while True:
     for (x, y, w, h) in objects:
         area = w*h
         minArea = cv2.getTrackbarPos("Min Area", "Result")
-        if area > minArea:
+        maxArea = cv2.getTrackbarPos("Max Area", "Result")
+        if area > minArea and area < maxArea:
             cv2.rectangle(img, (x,y), (x+w, y+h), color, 3)
             cv2.putText(img, objectName, (x, y-10), cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, color, 2)
             roi_color = img[y:y+h, x:x+w]
