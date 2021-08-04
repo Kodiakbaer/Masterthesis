@@ -19,13 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="70eee28b-38d1-4623-a1e3-d65267f6b42f" name="Default Changelist" comment="created cascade dir and cascade tester">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CascadeTester" beforeDir="false" afterPath="$PROJECT_DIR$/CascadeTester" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OpenCVChapter5.py" beforeDir="false" afterPath="$PROJECT_DIR$/OpenCVChapter5.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/Nathi.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Resources/TestWall.png" beforeDir="false" />
-    </list>
+    <list default="true" id="70eee28b-38d1-4623-a1e3-d65267f6b42f" name="Default Changelist" comment="maybe they are gone" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -245,6 +239,7 @@
       <workItem from="1603880385312" duration="875000" />
       <workItem from="1606604821727" duration="1033000" />
       <workItem from="1606674969144" duration="3580000" />
+      <workItem from="1628098205411" duration="749000" />
     </task>
     <task id="LOCAL-00001" summary="This is a Test commit for my Python file">
       <created>1598879594831</created>
@@ -316,7 +311,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601329923638</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="maybe they are gone">
+      <created>1628098294207</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1628098294207</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -340,83 +342,14 @@
     <MESSAGE value="Commit of all the Tutorial Chapters" />
     <MESSAGE value="Commit of Project1.py" />
     <MESSAGE value="created cascade dir and cascade tester" />
-    <option name="LAST_COMMIT_MESSAGE" value="created cascade dir and cascade tester" />
+    <MESSAGE value="maybe they are gone" />
+    <option name="LAST_COMMIT_MESSAGE" value="maybe they are gone" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1357" y="293" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1600771872662">
+    <state x="872" y="429" key="Vcs.Push.Dialog.v2" timestamp="1628098329127">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="414" y="235" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1160@0.0.1920.1160" timestamp="1599048838433" />
-    <state x="1357" y="293" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1600771872662" />
-    <state x="1667" y="490" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601289460058">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1667" y="490" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2560.1400@0.0.2560.1400" timestamp="1601289460058" />
-    <state x="511" y="28" key="CommitChangelistDialog2" timestamp="1600955419620">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="511" y="28" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1600955419620" />
-    <state x="740" y="335" key="FileChooserDialogImpl" timestamp="1598880025615">
-      <screen x="0" y="0" width="1920" height="1160" />
-    </state>
-    <state x="740" y="335" key="FileChooserDialogImpl/0.0.1920.1160@0.0.1920.1160" timestamp="1598880025615" />
-    <state width="1234" height="380" key="GridCell.Tab.0.bottom" timestamp="1606679673689">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1877" height="303" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1600955433180" />
-    <state width="1877" height="315" key="GridCell.Tab.0.bottom/0.0.1920.1160@0.0.1920.1160" timestamp="1598880098590" />
-    <state width="1234" height="380" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1606679673689" />
-    <state width="1234" height="380" key="GridCell.Tab.0.center" timestamp="1606679673689">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1877" height="303" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1600955433180" />
-    <state width="1877" height="315" key="GridCell.Tab.0.center/0.0.1920.1160@0.0.1920.1160" timestamp="1598880098590" />
-    <state width="1234" height="380" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1606679673689" />
-    <state width="1234" height="380" key="GridCell.Tab.0.left" timestamp="1606679673689">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1877" height="303" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1600955433180" />
-    <state width="1877" height="315" key="GridCell.Tab.0.left/0.0.1920.1160@0.0.1920.1160" timestamp="1598880098590" />
-    <state width="1234" height="380" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1606679673689" />
-    <state width="1234" height="380" key="GridCell.Tab.0.right" timestamp="1606679673689">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1877" height="303" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1600955433180" />
-    <state width="1877" height="315" key="GridCell.Tab.0.right/0.0.1920.1160@0.0.1920.1160" timestamp="1598880098590" />
-    <state width="1234" height="380" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1606679673689" />
-    <state width="1236" height="480" key="GridCell.Tab.1.bottom" timestamp="1601158731047">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1236" height="480" key="GridCell.Tab.1.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1601158731047" />
-    <state width="1236" height="480" key="GridCell.Tab.1.center" timestamp="1601158731047">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1236" height="480" key="GridCell.Tab.1.center/0.0.2560.1400@0.0.2560.1400" timestamp="1601158731047" />
-    <state width="1236" height="480" key="GridCell.Tab.1.left" timestamp="1601158731047">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1236" height="480" key="GridCell.Tab.1.left/0.0.2560.1400@0.0.2560.1400" timestamp="1601158731047" />
-    <state width="1236" height="480" key="GridCell.Tab.1.right" timestamp="1601158731047">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state width="1236" height="480" key="GridCell.Tab.1.right/0.0.2560.1400@0.0.2560.1400" timestamp="1601158731047" />
-    <state x="1373" y="199" key="SettingsEditor" timestamp="1600948312028">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="281" y="215" key="SettingsEditor/0.0.1920.1160@0.0.1920.1160" timestamp="1599048897311" />
-    <state x="1373" y="199" key="SettingsEditor/0.0.2560.1400@0.0.2560.1400" timestamp="1600948312028" />
-    <state x="1512" y="429" key="Vcs.Push.Dialog.v2" timestamp="1601329926612">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1512" y="429" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1601329926612" />
-    <state x="1707" y="389" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1600855565861">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1707" y="389" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.2560.1400@0.0.2560.1400" timestamp="1600855565861" />
-    <state x="1583" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1601031916659">
-      <screen x="0" y="0" width="2560" height="1400" />
-    </state>
-    <state x="1583" y="315" width="672" height="678" key="search.everywhere.popup/0.0.2560.1400@0.0.2560.1400" timestamp="1601031916659" />
+    <state x="872" y="429" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1628098329127" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter8.coverage" NAME="OpenCVChapter8 Coverage Results" MODIFIED="1600865574278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

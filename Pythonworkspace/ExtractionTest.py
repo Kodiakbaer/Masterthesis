@@ -5,6 +5,7 @@ import cv2
 
 path = "Resources\TestHolds\PA162178.JPG"
 image_vec = cv2.imread(path, 1)
+cv2.imshow(image_vec)
 g_blurred = cv2.GaussianBlur(image_vec, (5, 5), 0)
 
 blurred_float = g_blurred.astype(np.float32) / 255.0
