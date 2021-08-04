@@ -1,9 +1,10 @@
 import cv2
 
 ##############################################
-path = "Resources\haarcascades\haarcascade_holdsV4.xml"   # Path of the haarcascade
+path = "Resources\haarcascades\haarcascade_holdsv10-1.xml"   # Path of the haarcascade
 camNr = 0                           # Camera Number
 objectName = "Griff"                 # Object Name to Display
+#objectName = "Kletterer"
 frameWidth = 1240
 frameHeight = 960
 color = (255, 0, 255)
@@ -21,9 +22,9 @@ def empty(a):
 # create Trackbar
 cv2.namedWindow("Result")
 cv2.resizeWindow("Result", frameWidth, frameHeight+100)
-cv2.createTrackbar("Scale", "Result", 10, 1000, empty)
-cv2.createTrackbar("Neighbours", "Result", 18, 20, empty)
-cv2.createTrackbar("Min Area", "Result", 100, 100000, empty)
+cv2.createTrackbar("Scale", "Result", 20, 1000, empty)
+cv2.createTrackbar("Neighbours", "Result", 10 , 20, empty)
+cv2.createTrackbar("Min Area", "Result", 500, 100000, empty)
 cv2.createTrackbar("Max Area", "Result", 10000, 100000, empty)
 cv2.createTrackbar("Brightness", "Result", 100, 255, empty)
 
@@ -58,5 +59,7 @@ while True:
 
     cv2.imshow("Result", img)
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(1) & 0xFF == ord('s'):
+        cv2.imwrite("Resources/results/resultBesprechung1.jpg", img)
+    elif cv2.waitKey(1) & 0xFF == ord('q'):
         break
