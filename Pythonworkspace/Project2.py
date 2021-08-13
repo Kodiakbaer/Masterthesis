@@ -8,6 +8,7 @@ heightImg = 640
 
 #############################
 
+# This is a document scanner
 
 cap = cv2.VideoCapture(0)
 cap.set(3, widthImg)
@@ -24,6 +25,7 @@ def preProcessing(img):
     imgThres = cv2.erode(imgDial, kernel, iterations=1)
 
     return imgThres
+
 
 def getContours(img):
     biggest = np.array([])
@@ -66,6 +68,7 @@ def reorder (myPoints):
     #print("New Points", myPointsNew)
 
     return myPointsNew
+
 
 def getWarp(img, biggest):
     biggest = reorder(biggest)

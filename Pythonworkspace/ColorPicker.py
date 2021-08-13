@@ -6,9 +6,9 @@ def empty(a):
     pass
 
 
-imPath = "Resources/Stifte2.jpg"
+imPath = "D:\MMichenthaler\VideoFrames\Video2\Video2_frame1000.jpg"
 img = cv2.imread(imPath)
-imgResize = cv2.resize(img, (640, 480))
+imgResize = cv2.resize(img, (540, 960))
 cv2.namedWindow("TrackBars")
 cv2.resizeWindow("TrackBars", 640,240)
 cv2.createTrackbar("Hue Min", "TrackBars", 90, 255, empty)
@@ -35,13 +35,13 @@ while True:
     upper = np.array([h_max,s_max,v_max])
     mask = cv2.inRange(imgHSV, lower, upper)
     imgResult = cv2.bitwise_and(imgResize, imgResize, mask=mask)
-    imgVer = np.vstack((imgResize, imgResult))
+    #imgVer = np.vstack((imgResize, imgResult))
 
-    #cv2.imshow("Original Image", img)
+    cv2.imshow("Original Image", imgResize)
     #cv2.imshow("HSV Image", imgHSV)
     #cv2.imshow("Mask Image", mask)
     #cv2.imshow("Result Image", imgResult)
-    cv2.imshow("Results", imgVer)
+    cv2.imshow("Results", imgResult)
     cv2.imshow("Maske", mask)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):

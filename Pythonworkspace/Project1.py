@@ -54,7 +54,6 @@ def drawOnCanvas(myPoints, myColorValues):
         cv2.circle(imgResult, (point[0], point[1]), 10, myColorValues[point[2]], cv2.FILLED)
 
 
-
 while True:
     success, img = cap.read()
     imgResult = img.copy()

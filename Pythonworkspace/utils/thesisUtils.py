@@ -6,14 +6,18 @@ import cv2
 import logging
 
 
-def compareToBaselineImg(baseline, img, rect):
+def compare_baseline(baseline, img, rect=None):
+    if rect is None:
+        rect = [0, 0, baseline.shape[1], baseline.shape[0]]
+    newBase = baseline.copy()
+    newImg = img.copy()
     # Convert images to grayscale
-    before_gray = cv2.cvtColor(baseline[rect[1]:rect[3], rect[0]:rect[2]], cv2.COLOR_BGR2GRAY)
-    after_gray = cv2.cvtColor(img[rect[1]:rect[3], rect[0]:rect[2]], cv2.COLOR_BGR2GRAY)
+    before_gray = cv2.cvtColor(newBase[rect[1]:rect[3], rect[0]:rect[2]], cv2.COLOR_BGR2GRAY)
+    after_gray = cv2.cvtColor(newImg[rect[1]:rect[3], rect[0]:rect[2]], cv2.COLOR_BGR2GRAY)
 
     # Compute SSIM between two images
     (score, diff) = structural_similarity(before_gray, after_gray, full=True)
-    print("Image similarity", score)
+    # print("Image similarity", score)
 
     # The diff image contains the actual image differences between the two images
     # and is represented as a floating point data type in the range [0,1]
@@ -27,19 +31,19 @@ def compareToBaselineImg(baseline, img, rect):
     contours = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     contours = contours[0] if len(contours) == 2 else contours[1]
 
-    mask = np.zeros(baseline.shape, dtype='uint8')
-    filled_after = (img[rect[1]:rect[3], rect[0]:rect[2]])
+    mask = np.zeros(newBase.shape, dtype='uint8')
+    filled_after = (newImg[rect[1]:rect[3], rect[0]:rect[2]])
 
     for c in contours:
         area = cv2.contourArea(c)
         if area > 40:
             x, y, w, h = cv2.boundingRect(c)
-            cv2.rectangle(baseline, (x, y), (x + w, y + h), (36, 255, 12), 2)
-            cv2.rectangle(img, (x, y), (x + w, y + h), (36, 255, 12), 2)
+            #cv2.rectangle(newBase, (x, y), (x + w, y + h), (36, 255, 12), 2)
+            #cv2.rectangle(newImg, (x, y), (x + w, y + h), (36, 255, 12), 2)
             cv2.drawContours(mask, [c], 0, (0, 255, 0), -1)
             cv2.drawContours(filled_after, [c], 0, (0, 255, 0), -1)
 
-    return filled_after             #
+    return filled_after, score
 # Compares Images only in the Area inside the rectangle
 
 
@@ -94,7 +98,7 @@ def findSignificantContour(edgeImg):
 # Method used in extraction Method
 
 
-def exctraction(img, rect = None):
+def extraction(img, rect = None):
 
     if type(img) is str and rect:
         image_vec = cv2.imread(str(img), 1)
@@ -209,9 +213,84 @@ def drawRect(rect, img, color, lineThickness):
     return draw
 # Draw rect on img
 
+
 def rect_area(rect):
-    x1, y1, x2, y2 = np.array(rect1[0:4])
+    x1, y1, x2, y2 = np.array(rect[0:4])
     area = abs((x2 - x1) * (y2 - y1))
     return area
+# calculate area of rectangle
 
 
+def mask_colour(img, colorRange):
+
+    imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+    #for color in myColors:
+    lower = np.array(colorRange[0:3])
+    upper = np.array(colorRange[3:6])
+
+    mask = cv2.inRange(imgHSV, lower, upper)
+    imgResult = cv2.bitwise_and(img, img, mask=mask)
+
+    return imgResult
+# Method to mask image by color
+
+
+def mark_rectangle(action, x, y, flags, *userdata) :
+  # Referencing global variables
+  global top_left_corner, bottom_right_corner, tlc, brc
+  # Mark the top left corner when left mouse button is pressed
+  if action == cv2.EVENT_LBUTTONDOWN:
+    top_left_corner = [(x,y)]
+    # When left mouse button is released, mark bottom right corner
+    tlc = [x,y]
+    print(tlc)
+  elif action == cv2.EVENT_LBUTTONUP:
+    bottom_right_corner = [(x,y)]
+    # Draw the rectangle
+    cv2.rectangle(tempBase, top_left_corner[0], bottom_right_corner[0], (0,255,0),2, 8)
+    cv2.imshow("Window", tempBase)
+    brc = [x,y]
+    print(brc)
+    rect = [tlc[0],tlc[1],brc[0],brc[1]]
+    print(rect)
+    tempHolds.append(rect)
+#method for marking a rectangle in a window and
+
+
+def hold_marker(image):
+    #image = cv2.imread("D:\MMichenthaler\VideoFrames\Video2\Video2_frame1000.jpg")
+    # Make a temporary image, will be useful to clear the drawing
+    temp = image.copy()
+    global tempBase
+    global tempHolds
+    tempBase = image.copy()
+    tempHolds = []
+    # Create a named window
+
+    cv2.namedWindow("Window")
+    # highgui function called when mouse events occur
+    cv2.setMouseCallback("Window", mark_rectangle, tempHolds)
+
+    k = 0
+    # Close the window when key q is pressed
+    while k != 113:
+        # Display the image
+        cv2.imshow("Window", image)
+        k = cv2.waitKey(0)
+        # If c is pressed, clear the window, using the dummy image
+        if (k == 99):
+            image = temp.copy()
+            cv2.imshow("Window", image)
+            tempHolds = []
+        if (k == 32):
+            print(tempHolds)
+        if (k == 115):
+            f = open("holds.txt", "w")
+            f.write(str(tempHolds))
+
+    cv2.destroyAllWindows()
+    del tempBase
+    holds = tempHolds
+    del tempHolds
+    return holds

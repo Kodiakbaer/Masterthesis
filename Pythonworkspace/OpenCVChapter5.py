@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 
+# Ebene Entzerrung
 img = cv2.imread("Resources/LSW.jpg")
 
 width, height = 2000, 2000
