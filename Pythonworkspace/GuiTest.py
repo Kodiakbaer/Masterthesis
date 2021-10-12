@@ -23,22 +23,27 @@ def mark_rectangle(action, x, y, flags, *userdata) :
     cv2.imshow("Window",image)
     brc = [x,y]
     print(brc)
-    rect = [tlc[0],tlc[1],brc[0],brc[1]]
+    rect = [tlc[0]*OrigWidth/900, tlc[1]*OrigHeight/1600, brc[0]*OrigWidth/900, brc[1]*OrigHeight/1600]
     print(rect)
     holds.append(rect)
   #return [top_left_corner, bottom_right_corner]
 
 
 # Read Images
-image = cv2.imread("D:\MMichenthaler\VideoFrames\Video2\Video2_frame1000.jpg")
+image = cv2.imread("D:/MMichenthaler/Data_15-09-2021_Workspace/NewVideo2/NewVideo2_frame190.jpg")
 # Make a temporary image, will be useful to clear the drawing
+global OrigWidth
+global OrigHeight
+OrigWidth = image.shape[1]
+OrigHeight = image.shape[0]
+image = cv2.resize(image, (900, 1600), interpolation = cv2.INTER_AREA)
 temp = image.copy()
 # Create a named window
 
 cv2.namedWindow("Window")
 # highgui function called when mouse events occur
 holds = []
-cv2.setMouseCallback("Window", mark_rectangel, holds)
+cv2.setMouseCallback("Window", mark_rectangle, holds)
 tlc = []
 brc = []
 
@@ -49,13 +54,13 @@ while k!=113:
   # Display the image
   cv2.imshow("Window", image)
   k = cv2.waitKey(0)
-  # If c is pressed, clear the window, using the dummy image
-  if (k == 99):
+
+  if (k == 99):               # If c is pressed, clear the window, using the dummy image
     image= temp.copy()
     cv2.imshow("Window", image)
-  if (k == 32):
+  if (k == 32):               # key press " "
     print(holds)
-  if (k == 115):
+  if (k == 115):              # key press "s"
     f = open("holds.txt", "w")
     f.write(str(holds))
 

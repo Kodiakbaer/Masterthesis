@@ -53,6 +53,11 @@ def pixToPercent(rectPix, img):
     return rectPrct
 # Converts Rectangle coordinates from Pixels to Percentage os the respective Image
 
+def percToPix(rectPerc, img ):
+    w, h = img.shape[1], img.shape[0]
+    rectPix = np.array([rectPerc[0]*w, rectPerc[1]*h, rectPerc[2]*w, rectPerc[3]*h])
+    return rectPix
+# Converts Rectangle coordinates from Pixels to Percentage os the respective Image
 
 def SaltPepperNoise(edgeImg):
 
@@ -241,18 +246,18 @@ def mark_rectangle(action, x, y, flags, *userdata) :
   global top_left_corner, bottom_right_corner, tlc, brc
   # Mark the top left corner when left mouse button is pressed
   if action == cv2.EVENT_LBUTTONDOWN:
-    top_left_corner = [(x,y)]
+    top_left_corner = [(x, y)]
     # When left mouse button is released, mark bottom right corner
-    tlc = [x,y]
+    tlc = [x, y]
     print(tlc)
   elif action == cv2.EVENT_LBUTTONUP:
-    bottom_right_corner = [(x,y)]
+    bottom_right_corner = [(x, y)]
     # Draw the rectangle
-    cv2.rectangle(tempBase, top_left_corner[0], bottom_right_corner[0], (0,255,0),2, 8)
+    cv2.rectangle(tempBase, top_left_corner[0], bottom_right_corner[0], (0, 255, 0), 2, 8)
     cv2.imshow("Window", tempBase)
-    brc = [x,y]
+    brc = [x, y]
     print(brc)
-    rect = [tlc[0],tlc[1],brc[0],brc[1]]
+    rect = [tlc[0]*OrigWidth/900, tlc[1]*OrigHeight/1600, brc[0]*OrigWidth/900, brc[1]*OrigHeight/1600]
     print(rect)
     tempHolds.append(rect)
 #method for marking a rectangle in a window and
@@ -261,6 +266,12 @@ def mark_rectangle(action, x, y, flags, *userdata) :
 def hold_marker(image):
     #image = cv2.imread("D:\MMichenthaler\VideoFrames\Video2\Video2_frame1000.jpg")
     # Make a temporary image, will be useful to clear the drawing
+    global OrigWidth
+    global OrigHeight
+    OrigWidth = image.shape[1]
+    OrigHeight = image.shape[0]
+    image = cv2.resize(image, (900, 1600), interpolation=cv2.INTER_AREA)
+
     temp = image.copy()
     global tempBase
     global tempHolds

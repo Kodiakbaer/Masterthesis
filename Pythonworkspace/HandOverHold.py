@@ -55,14 +55,15 @@ flags.DEFINE_boolean('video', False, 'is a video as a file or cam feed used?')
 
 ###################### outputs ######################
 flags.DEFINE_string('output', './output.jpg', 'path to output image')
-
+flags.DEFINE_string('holdsOut', ' ', 'path to output image')
+flags.DEFINE_string('numberedSource', ' ', 'path to numbered images')
 #----------------------for testing purposes
 basePath = "D:\MMichenthaler\VideoFrames\Video2\Video2_frame1000.jpg"
 #basePath = "D:\MMichenthaler\VideoFrames\Video2\Video2_frame1921.jpg"
 #basePath = "D:\MMichenthaler\VideoFrames\Video2\Video2_frame1871.jpg"
 base = cv2.imread(basePath)
 
-baseRect = np.array([584, 1036, 625, 1069])
+# baseRect = np.array([584, 1036, 625, 1069])
 color = [0, 24, 27, 178, 190, 146]
 #aoi = np.array(base[baseRect[1]:baseRect[3], baseRect[0]:baseRect[2]])
 
@@ -71,10 +72,12 @@ color = [0, 24, 27, 178, 190, 146]
 #----------------------------------------------------------------------------------------------------------------------#
 
 def main(_argv):
-
+    #basePath = "D:\MMichenthaler\VideoFrames\Video2\Video2_frame1000.jpg"
+    #base = cv2.imread(basePath)
     allClimbers = []
-    holds = hold_marker(base)
-    print(holds)
+    climbersThisPic = []
+    #holds = hold_marker(base)
+    #print(holds)
 
     #------------------------------------------
     # Dieser Part ist für die Detection mittels Yolo, da das nicht ausreichend funktioniert wird er hier nun bis auf 
@@ -106,9 +109,63 @@ def main(_argv):
         logging.info('Baseline set and saved to: {}'.format(FLAGS.output) + str(count))
     # using a separate detector for holds on the bare wall image to set a baseline and saving the results
 
-    elif FLAGS.baseline:
+    '''
+    elif FLAGS.baseline:                        # dieser code ist um die Griffe in einem Gui zu markieren
+        base = cv2.imread(FLAGS.baseline)
         holds = hold_marker(base)
         print(holds)
+    
+    holds = [[555, 1253, 594, 1288],            # für weitere Testungen die mit hold_marker markierten Griffe von Video2 des alten datensatzes
+             [588, 1178, 627, 1215],
+             [584, 1107, 626, 1141],
+             [579, 1035, 631, 1075],
+             [584, 967, 618, 994],
+             [545, 862, 599, 908],
+             [524, 830, 570, 873],
+             [487, 755, 565, 828],
+             [512, 680, 584, 741],
+             [526, 611, 597, 681],
+             [561, 550, 617, 588],
+             [532, 489, 586, 528],
+             [622, 404, 667, 449],
+             [585, 378, 616, 400],
+             [531, 392, 565, 420],
+             [523, 319, 565, 366],
+             [468, 276, 503, 305],
+             [531, 177, 579, 223],
+             [452, 103, 495, 146]]
+    '''
+
+    holds = [[354, 1252, 447, 1323],        # für weitere Testungen die mit hold_marker markierten Griffe von Video2 des neuen Datensatzes
+             [432, 1347, 492, 1397],
+             [518, 1291, 569, 1349],
+             [439, 1206, 528, 1260],
+             [395, 1113, 470, 1161],
+             [531, 1069, 579, 1105],
+             [540, 988, 581, 1027],
+             [396, 1023, 461, 1068],
+             [459, 937, 513, 983],
+             [321, 964, 389, 1033],
+             [318, 845, 363, 899],
+             [465, 766, 511, 820],
+             [314, 772, 367, 809],
+             [357, 700, 413, 740],
+             [475, 636, 520, 675],
+             [374, 612, 437, 679],
+             [500, 600, 542, 627],
+             [424, 543, 481, 602],
+             [516, 560, 567, 596],
+             [568, 488, 609, 520],
+             [403, 456, 469, 493],
+             [473, 424, 532, 462],
+             [476, 358, 517, 399],
+             [414, 382, 452, 424],
+             [515, 295, 564, 334],
+             [455, 327, 494, 366],
+             [450, 206, 495, 245],
+             [514, 235, 558, 273],
+             [496, 103, 459, 144],
+             [514, 180, 560, 216]]
 
     if FLAGS.detection is True:
         physical_devices = tf.config.experimental.list_physical_devices('GPU')
@@ -151,13 +208,17 @@ def main(_argv):
         #     cv2.imwrite(FLAGS.output, img)
         #     logging.info('output saved to: {}'.format(FLAGS.output))
 
-        if FLAGS.imDir:
+        if FLAGS.imDir:                                                 # für Detection auf allen bildern in imDir
+            climberCounter = 0
             for count, dirImg in enumerate(Path(FLAGS.imDir).iterdir()):
+
+                climbDetect = False
                 img_raw = tf.image.decode_image(
                     open(dirImg, 'rb').read(), channels=3)
 
                 img = tf.expand_dims(img_raw, 0)
                 img = transform_images(img, FLAGS.size)
+
 
                 t1 = time.time()
                 boxes, scores, classes, nums = yolo(img)
@@ -165,23 +226,43 @@ def main(_argv):
                 logging.info('time: {}'.format(t2 - t1))
 
                 logging.info('detections:')
-
+                img = cv2.cvtColor(img_raw.numpy(), cv2.COLOR_RGB2BGR)
                 for i in range(nums[0]):
                     #print(np.array(boxes[0][i]))
                     logging.info('\t{}, {}, {}'.format(class_names[int(classes[0][i])],
                                                        np.array(scores[0][i]),
                                                        np.array(boxes[0][i])))
                     if class_names[int(classes[0][i])] == "person" and scores[0][i] > 0.6:
-                        allClimbers.append(boxes[0][i])                           # saving all detected hands in allhands
 
-                img = cv2.cvtColor(img_raw.numpy(), cv2.COLOR_RGB2BGR)
+
+                        climbersThisPic.append(np.array(boxes[0][i]))                           # saving all detected climbers in allclimbers------ für testung auskommentieren PROBLEM mit 2 personen in bild
+                        '''
+                        if climbDetect is False:                                                        #+----
+                            cv2.imwrite(FLAGS.numberedSource + str(climberCounter) + '.jpg', img)       #| Mit neuem Datensatz einmal diesen block unkommentiert mitlaufen lassen
+                            climbDetect = True                                                          #| dieser Block speichert jeden frame in dem eine Person
+                            climberCounter += 1                                                         #| vorkommt einmal nummeriert ab
+                                                                                                        #+----
+                        '''
+                yOnes = []
+                for j in range(len(climbersThisPic)):
+                    #print('\t{}'.format(np.array(climbersThisPic[j][1:2])))
+                    yOnes.append(climbersThisPic[j][1:2])
+
+                allClimbers.append(climbersThisPic[np.argmin(yOnes)])                       # die Person mit der BB mit dem geringeren y1 wert, also die die weiter oben ist,
+                                                                                            # wird als Kletterer in allClimbers gespeichert
+                climbersThisPic = []
+
                 # img = draw_outputs(img, (boxes, scores, classes, nums), class_names)
+                # cv2.imwrite(FLAGS.numberedSource + str(count) + '.jpg', img)
                 img = draw_persons(img, (boxes, scores, classes, nums), class_names)
-                cv2.imwrite(FLAGS.output+str(count)+'.jpg', img)
+                cv2.imwrite(FLAGS.output + str(count) + '.jpg', img)
                 logging.info('output saved to: {}'.format(FLAGS.output) + str(count))
 
-        # für Detection auf allen bildern in imDir
-        elif FLAGS.video is True:
+            f = open("climbers.txt", "w")
+            f.write(str(allClimbers))
+
+
+        elif FLAGS.video is True: # für Detection am cam feed oder uaf dem Video allen
             frameWidth = 1080
             frameHeight = 1920
             if FLAGS.cam is True:
@@ -207,7 +288,7 @@ def main(_argv):
                     logging.info('\t{}, {}, {}'.format(class_names[int(classes[0][i])],
                                                        np.array(scores[0][i]),
                                                        np.array(boxes[0][i])))
-                    allhands.append(boxes[0][i])  # saving all detected hands in allhands
+                    allhands.append(np.array(boxes[0][i]))  # saving all detected hands in allhands
 
                 img = cv2.cvtColor(img_raw.numpy(), cv2.COLOR_RGB2BGR)
                 img = draw_outputs(img, (boxes, scores, classes, nums), class_names)
@@ -215,7 +296,7 @@ def main(_argv):
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
-        # für Detection am cam feed oder uaf dem Video allen
+
 
         else:
             img_raw = tf.image.decode_image(
@@ -244,15 +325,62 @@ def main(_argv):
 
     # 13.08.2021 diese schleife modifizieren um in der richtigen reihenfolge über griffe und bilder zu loopen
     # -> auf überschneidung von griffen und personen boundingboxes achten -> nur dann differenzen berechnen
-    olh = []                                                         # overlapping hands
+    print(str(allClimbers))
+
+    olh = []  # overlapping hands
+    points = 0
+    holdList = "Gripped Holds:"
+    overlapList = 'Overlaps:'
     if FLAGS.baseline:
-        for hold in holds:                                           # alle hände mit allen griffen verschneiden
-            for climber in allClimbers:                                        # -> fläche von hand und überschneidung vergleichen
-                r = overlapRect(hold, climber)
-                if rect_area(r) >= 0.75 * rect_area(climber):
-                    drawRect(r, base, (255, 0, 255), 2)
-                    olh.append(overlapRect(hold, climber))
-    print(np.array(allClimbers))
+        #holdID = 0
+        for holdID in range(len(holds)):         # alle hände mit allen griffen verschneiden
+            logging.info('loading hold Nr.' + str(holdID))
+
+            for index in range(len(allClimbers)):                                        # -> fläche von hand und überschneidung vergleichen
+                climbImg = cv2.imread(FLAGS.numberedSource + str(index) + '.jpg')
+
+                climberPix = percToPix(allClimbers[index], cv2.imread(FLAGS.baseline))
+                r = overlapRect(holds[holdID], climberPix)
+
+                delay = index - 120                                                     #Delay hier bearbeiten
+
+                #print(rect_area(holds[holdID]), rect_area(r), rect_area(climberPix))
+
+
+
+                if index == 0:
+                    base = climbImg.copy()
+                elif index > 120:                                                       #hier auch Delay bearbeiten
+                    base = cv2.imread(FLAGS.numberedSource + str(delay) + '.jpg')
+
+                if abs(rect_area(holds[holdID]) - rect_area(r)) < 10e-12 and (index % 6) == 0:
+                    olh.append(overlapRect(holds[holdID], climberPix))
+                    #print(climbImg)
+
+                    #img = cv2.imread(str(climbImg))
+                    #baseMasked = mask_colour(base, color)
+                    #imgMasked = mask_colour(climbImg, color)
+                    allDiff, score = compare_baseline(base, climbImg, holds[holdID])
+                    logging.info('overlap detected: image ' + str(index) + ' and hold ' + str(holdID) + '; image similarity ' + str(score))
+                    overlapList = overlapList + '\n overlap detected: image ' + str(index) + 'and hold' + str(holdID) + '; image similarity ' + str(score)
+                    cv2.imwrite(FLAGS.holdsOut + str(holdID) + '/gripped_' + str(index) + '.jpg', allDiff)
+                    if score < 0.5:                                                     #hier die Similarity
+                        holdList = holdList + " \n hold" +str(holdID)
+                        points += 1
+                        logging.info('progress detected: points = ' + str(points))
+                        break
+                else:
+                    print(allClimbers[index])
+                    print()
+                    logging.info('CLimber Nr. ' + str(index) + ' and Grip Nr. ' + str(holdID) +'no overlap')
+        #holdID += 1
+    print("Total points: " + str(points))
+    # print(holdList)
+    # print(overlapList)
+    print(len(allClimbers))
+
+
+    #print(np.array(allClimbers))
 
 
 #----------------------for testing purposes
@@ -287,7 +415,7 @@ def main(_argv):
     print(base.shape)
     baseRectPercent = pixToPercent(baseRect, base)
     baseArea = rect_area(baseRectPercent)
-
+    
     
     for i in range(len(allhands)):
         detectArea = rect_area(overlapRect(np.array(allhands[i]), baseRectPercent))
@@ -307,8 +435,8 @@ def main(_argv):
     cv2.imshow("base", base)
     cv2.imshow("compare", test)
     cv2.waitKey(0)
-
     '''
+
 
 
     #holds = []
