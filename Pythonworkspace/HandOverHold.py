@@ -1,5 +1,7 @@
 import time
-from datetime import datetime
+import os
+#from datetime import datetime
+import datetime
 from absl import app, flags, logging
 from absl.flags import FLAGS
 from pathlib import Path
@@ -46,32 +48,38 @@ flags.DEFINE_string('imDir', None, 'path to input image directory')    # Video t
 flags.DEFINE_string('vidFile', None, 'path to input Video')
 # flags.DEFINE_string('tfrecord', None, 'tfrecord instead of image')
 flags.DEFINE_string('baseline', None, 'Baseline Image of Wall without the climber')  # Baseline Image of Wall without the climber
+flags.DEFINE_integer('delay', 120, 'Delay for comparison baseline')
+flags.DEFINE_integer('similarity', 0.5, 'Similarity percent under which a Hold is declared gripped')
+flags.DEFINE_list('holdColor', None, 'if you already know your color values you can put them in here')
+
 
 ##################### conditions #####################
 flags.DEFINE_boolean('detection', False, 'detection Yes or No')
 flags.DEFINE_boolean('holdsDetection', False, 'Hold detection Yes or No')
 flags.DEFINE_boolean('cam', False, 'is a cam used?')
 flags.DEFINE_boolean('video', False, 'is a video as a file or cam feed used?')
+flags.DEFINE_boolean('colorMask', False, 'do you want to apply a color mask for the baseline comaprison?')
 
 ###################### outputs ######################
 flags.DEFINE_string('output', './output.jpg', 'path to output image')
 flags.DEFINE_string('holdsOut', ' ', 'path to output image')
 flags.DEFINE_string('numberedSource', ' ', 'path to numbered images')
 #----------------------for testing purposes
-basePath = "D:\MMichenthaler\VideoFrames\Video2\Video2_frame1000.jpg"
+#basePath = "D:\MMichenthaler\VideoFrames\Video2\Video2_frame1000.jpg"
 #basePath = "D:\MMichenthaler\VideoFrames\Video2\Video2_frame1921.jpg"
 #basePath = "D:\MMichenthaler\VideoFrames\Video2\Video2_frame1871.jpg"
-base = cv2.imread(basePath)
+#base = cv2.imread(basePath)
 
 # baseRect = np.array([584, 1036, 625, 1069])
-color = [0, 24, 27, 178, 190, 146]
-#aoi = np.array(base[baseRect[1]:baseRect[3], baseRect[0]:baseRect[2]])
+# color = [0, 24, 27, 178, 190, 146]
+# aoi = np.array(base[baseRect[1]:baseRect[3], baseRect[0]:baseRect[2]])
 
 
 
 #----------------------------------------------------------------------------------------------------------------------#
 
 def main(_argv):
+    timerStart = time.time()
     #basePath = "D:\MMichenthaler\VideoFrames\Video2\Video2_frame1000.jpg"
     #base = cv2.imread(basePath)
     allClimbers = []
@@ -109,12 +117,31 @@ def main(_argv):
         logging.info('Baseline set and saved to: {}'.format(FLAGS.output) + str(count))
     # using a separate detector for holds on the bare wall image to set a baseline and saving the results
 
+    holds = [[843, 2692, 992, 2835],  # holds für newVideo1
+             [712, 2516, 891, 2644],
+             [879, 2409, 1061, 2519],
+             [787, 2039, 924, 2132],
+             [912, 1875, 1025, 1971],
+             [775, 1795, 888, 1887],
+             [1013, 1705, 1120, 1798],
+             [819, 1392, 933, 1520],
+             [1028, 1112, 1141, 1199],
+             [849, 1079, 959, 1213],
+             [807, 909, 941, 987],
+             [956, 713, 1037, 799],
+             [864, 602, 950, 689],
+             [1022, 584, 1129, 671],
+             [903, 408, 986, 495],
+             [1010, 280, 1123, 367]]
+
+
     '''
-    elif FLAGS.baseline:                        # dieser code ist um die Griffe in einem Gui zu markieren
+        elif FLAGS.baseline:                        # dieser code ist um die Griffe in einem Gui zu markieren
         base = cv2.imread(FLAGS.baseline)
         holds = hold_marker(base)
         print(holds)
-    
+
+   
     holds = [[555, 1253, 594, 1288],            # für weitere Testungen die mit hold_marker markierten Griffe von Video2 des alten datensatzes
              [588, 1178, 627, 1215],
              [584, 1107, 626, 1141],
@@ -134,7 +161,7 @@ def main(_argv):
              [468, 276, 503, 305],
              [531, 177, 579, 223],
              [452, 103, 495, 146]]
-    '''
+    
 
     holds = [[354, 1252, 447, 1323],        # für weitere Testungen die mit hold_marker markierten Griffe von Video2 des neuen Datensatzes
              [432, 1347, 492, 1397],
@@ -166,6 +193,13 @@ def main(_argv):
              [514, 235, 558, 273],
              [496, 103, 459, 144],
              [514, 180, 560, 216]]
+    '''
+    if FLAGS.colorMask is True:
+        color = color_picker(FLAGS.baseline)
+    elif FLAGS.holdColor:
+        color = FLAGS.holdColor
+
+
 
     if FLAGS.detection is True:
         physical_devices = tf.config.experimental.list_physical_devices('GPU')
@@ -207,14 +241,19 @@ def main(_argv):
         #     img = draw_outputs(img, (boxes, scores, classes, nums), class_names)
         #     cv2.imwrite(FLAGS.output, img)
         #     logging.info('output saved to: {}'.format(FLAGS.output))
+        # print(sorted(os.listdir(FLAGS.imDir), key=lambda x: int(x[15:-5])))
 
         if FLAGS.imDir:                                                 # für Detection auf allen bildern in imDir
             climberCounter = 0
-            for count, dirImg in enumerate(Path(FLAGS.imDir).iterdir()):
-
+            #for count, dirImg in enumerate(Path(FLAGS.imDir).iterdir()):                    # , key=lambda x: int(x[69:-4]) beim key die anzahl der Zeichen des Paths angeben der vor der nummerierung steht
+            for count, dirImg in enumerate(sorted(os.listdir(FLAGS.imDir), key=lambda x: int(x[15:-4]))):
                 climbDetect = False
-                img_raw = tf.image.decode_image(
-                    open(dirImg, 'rb').read(), channels=3)
+
+                #img_raw = tf.image.decode_image(
+                #   open(dirImg, 'rb').read(), channels=3)
+
+                img_raw = cv2.imread(FLAGS.imDir + dirImg)
+                img_raw = cv2.cvtColor(img_raw, cv2.COLOR_BGR2RGB)
 
                 img = tf.expand_dims(img_raw, 0)
                 img = transform_images(img, FLAGS.size)
@@ -226,7 +265,7 @@ def main(_argv):
                 logging.info('time: {}'.format(t2 - t1))
 
                 logging.info('detections:')
-                img = cv2.cvtColor(img_raw.numpy(), cv2.COLOR_RGB2BGR)
+                img = cv2.cvtColor(img_raw, cv2.COLOR_RGB2BGR)
                 for i in range(nums[0]):
                     #print(np.array(boxes[0][i]))
                     logging.info('\t{}, {}, {}'.format(class_names[int(classes[0][i])],
@@ -241,8 +280,8 @@ def main(_argv):
                             cv2.imwrite(FLAGS.numberedSource + str(climberCounter) + '.jpg', img)       #| Mit neuem Datensatz einmal diesen block unkommentiert mitlaufen lassen
                             climbDetect = True                                                          #| dieser Block speichert jeden frame in dem eine Person
                             climberCounter += 1                                                         #| vorkommt einmal nummeriert ab
-                                                                                                        #+----
-                        '''
+                        '''                                                                                #+----
+
                 yOnes = []
                 for j in range(len(climbersThisPic)):
                     #print('\t{}'.format(np.array(climbersThisPic[j][1:2])))
@@ -261,7 +300,7 @@ def main(_argv):
             f = open("climbers.txt", "w")
             f.write(str(allClimbers))
 
-
+#------------------------------------------------------------------------------------------ momentan nicht in verwendung
         elif FLAGS.video is True: # für Detection am cam feed oder uaf dem Video allen
             frameWidth = 1080
             frameHeight = 1920
@@ -320,6 +359,7 @@ def main(_argv):
             cv2.imwrite(FLAGS.output, img)
             logging.info('output saved to: {}'.format(FLAGS.output))
         # einzel bild detection
+#-----------------------------------------------------------------------------------------------------------------------
     # using the hand detection to create a list of all detected Hands
 
 
@@ -342,7 +382,7 @@ def main(_argv):
                 climberPix = percToPix(allClimbers[index], cv2.imread(FLAGS.baseline))
                 r = overlapRect(holds[holdID], climberPix)
 
-                delay = index - 120                                                     #Delay hier bearbeiten
+                delay = index - FLAGS.delay                                                     #Delay hier bearbeiten
 
                 #print(rect_area(holds[holdID]), rect_area(r), rect_area(climberPix))
 
@@ -350,28 +390,28 @@ def main(_argv):
 
                 if index == 0:
                     base = climbImg.copy()
-                elif index > 120:                                                       #hier auch Delay bearbeiten
+                elif index > FLAGS.delay:                                                       #hier auch Delay bearbeiten
                     base = cv2.imread(FLAGS.numberedSource + str(delay) + '.jpg')
 
-                if abs(rect_area(holds[holdID]) - rect_area(r)) < 10e-12 and (index % 6) == 0:
+                if abs(rect_area(holds[holdID]) - rect_area(r)) < 10e-12 and (index % 10) == 0:
                     olh.append(overlapRect(holds[holdID], climberPix))
-                    #print(climbImg)
-
-                    #img = cv2.imread(str(climbImg))
-                    #baseMasked = mask_colour(base, color)
-                    #imgMasked = mask_colour(climbImg, color)
+                    # print(climbImg)
+                    if FLAGS.colorMask is True:
+                        img = cv2.imread(str(climbImg))
+                        baseMasked = mask_colour(base, color)
+                        imgMasked = mask_colour(climbImg, color)
                     allDiff, score = compare_baseline(base, climbImg, holds[holdID])
                     logging.info('overlap detected: image ' + str(index) + ' and hold ' + str(holdID) + '; image similarity ' + str(score))
                     overlapList = overlapList + '\n overlap detected: image ' + str(index) + 'and hold' + str(holdID) + '; image similarity ' + str(score)
                     cv2.imwrite(FLAGS.holdsOut + str(holdID) + '/gripped_' + str(index) + '.jpg', allDiff)
-                    if score < 0.5:                                                     #hier die Similarity
+                    if score < FLAGS.similarity:                                                     #hier die Similarity
                         holdList = holdList + " \n hold" +str(holdID)
                         points += 1
                         logging.info('progress detected: points = ' + str(points))
                         break
                 else:
-                    print(allClimbers[index])
-                    print()
+                    #print(allClimbers[index])
+
                     logging.info('CLimber Nr. ' + str(index) + ' and Grip Nr. ' + str(holdID) +'no overlap')
         #holdID += 1
     print("Total points: " + str(points))
@@ -379,6 +419,8 @@ def main(_argv):
     # print(overlapList)
     print(len(allClimbers))
 
+    timerEnd = time.time()
+    logging.info('Elapsed time: {}'.format(str(datetime.timedelta(timerEnd - timerStart))))
 
     #print(np.array(allClimbers))
 

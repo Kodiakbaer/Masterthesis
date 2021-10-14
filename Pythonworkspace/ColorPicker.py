@@ -6,7 +6,7 @@ def empty(a):
     pass
 
 
-imPath = "D:\MMichenthaler\VideoFrames\Video2\Video2_frame1000.jpg"
+imPath = "D:/MMichenthaler/Data_15-09-2021_Workspace/NewVideo1/NewVideo1_frame250.jpg"
 img = cv2.imread(imPath)
 imgResize = cv2.resize(img, (540, 960))
 cv2.namedWindow("TrackBars")

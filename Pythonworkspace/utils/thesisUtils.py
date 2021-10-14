@@ -257,7 +257,9 @@ def mark_rectangle(action, x, y, flags, *userdata) :
     cv2.imshow("Window", tempBase)
     brc = [x, y]
     print(brc)
-    rect = [tlc[0]*OrigWidth/900, tlc[1]*OrigHeight/1600, brc[0]*OrigWidth/900, brc[1]*OrigHeight/1600]
+    rect = [int(round(tlc[0] * OrigWidth / 725, 0)), int(round(tlc[1] * OrigHeight / 1288, 0)),
+            int(round(brc[0] * OrigWidth / 725, 0)), int(round(brc[1] * OrigHeight / 1288, 0))]
+
     print(rect)
     tempHolds.append(rect)
 #method for marking a rectangle in a window and
@@ -270,7 +272,7 @@ def hold_marker(image):
     global OrigHeight
     OrigWidth = image.shape[1]
     OrigHeight = image.shape[0]
-    image = cv2.resize(image, (900, 1600), interpolation=cv2.INTER_AREA)
+    image = cv2.resize(image, (725, 1288), interpolation=cv2.INTER_AREA)
 
     temp = image.copy()
     global tempBase
@@ -305,3 +307,49 @@ def hold_marker(image):
     holds = tempHolds
     del tempHolds
     return holds
+
+
+def color_picker(imPath):
+    imPath = "D:/MMichenthaler/Data_15-09-2021_Workspace/NewVideo1/NewVideo1_frame250.jpg"
+    img = cv2.imread(imPath)
+    imgResize = cv2.resize(img, (540, 960))
+    cv2.namedWindow("TrackBars")
+    cv2.resizeWindow("TrackBars", 640, 240)
+    cv2.createTrackbar("Hue Min", "TrackBars", 90, 255, empty)
+    cv2.createTrackbar("Hue Max", "TrackBars", 115, 255, empty)
+    cv2.createTrackbar("Sat Min", "TrackBars", 230, 255, empty)
+    cv2.createTrackbar("Sat Max", "TrackBars", 255, 255, empty)
+    cv2.createTrackbar("Val Min", "TrackBars", 25, 255, empty)
+    cv2.createTrackbar("Val Max", "TrackBars", 200, 255, empty)
+
+    while True:
+
+        imgHSV = cv2.cvtColor(imgResize, cv2.COLOR_BGR2HSV)
+        h_min = cv2.getTrackbarPos("Hue Min", "TrackBars")
+        h_max = cv2.getTrackbarPos("Hue Max", "TrackBars")
+
+        s_min = cv2.getTrackbarPos("Sat Min", "TrackBars")
+        s_max = cv2.getTrackbarPos("Sat Max", "TrackBars")
+
+        v_min = cv2.getTrackbarPos("Val Min", "TrackBars")
+        v_max = cv2.getTrackbarPos("Val Max", "TrackBars")
+        print(h_min, h_max, s_min, s_max, v_min, v_max)
+
+        lower = np.array([h_min, s_min, v_min])
+        upper = np.array([h_max, s_max, v_max])
+        mask = cv2.inRange(imgHSV, lower, upper)
+        imgResult = cv2.bitwise_and(imgResize, imgResize, mask=mask)
+        # imgVer = np.vstack((imgResize, imgResult))
+
+        cv2.imshow("Original Image", imgResize)
+        # cv2.imshow("HSV Image", imgHSV)
+        # cv2.imshow("Mask Image", mask)
+        # cv2.imshow("Result Image", imgResult)
+        cv2.imshow("Results", imgResult)
+        cv2.imshow("Maske", mask)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+
+            return [h_min, h_max, s_min, s_max, v_min, v_max]
+
+

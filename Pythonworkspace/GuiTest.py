@@ -23,7 +23,8 @@ def mark_rectangle(action, x, y, flags, *userdata) :
     cv2.imshow("Window",image)
     brc = [x,y]
     print(brc)
-    rect = [tlc[0]*OrigWidth/900, tlc[1]*OrigHeight/1600, brc[0]*OrigWidth/900, brc[1]*OrigHeight/1600]
+    rect = [int(round(tlc[0]*OrigWidth/725, 0)), int(round(tlc[1]*OrigHeight/1288, 0)),
+            int(round(brc[0]*OrigWidth/725, 0)), int(round(brc[1]*OrigHeight/1288, 0))]
     print(rect)
     holds.append(rect)
   #return [top_left_corner, bottom_right_corner]
@@ -36,7 +37,7 @@ global OrigWidth
 global OrigHeight
 OrigWidth = image.shape[1]
 OrigHeight = image.shape[0]
-image = cv2.resize(image, (900, 1600), interpolation = cv2.INTER_AREA)
+image = cv2.resize(image, (725, 1288), interpolation = cv2.INTER_AREA)
 temp = image.copy()
 # Create a named window
 
@@ -56,7 +57,8 @@ while k!=113:
   k = cv2.waitKey(0)
 
   if (k == 99):               # If c is pressed, clear the window, using the dummy image
-    image= temp.copy()
+    image = temp.copy()
+    tempHolds = []
     cv2.imshow("Window", image)
   if (k == 32):               # key press " "
     print(holds)
