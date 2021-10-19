@@ -1,6 +1,7 @@
 # Import packages
 import cv2
 import numpy as np
+import csv
 
 # Lists to store the bounding box coordinates
 top_left_corner=[]
@@ -31,7 +32,9 @@ def mark_rectangle(action, x, y, flags, *userdata) :
 
 
 # Read Images
-image = cv2.imread("D:/MMichenthaler/Data_15-09-2021_Workspace/NewVideo2/NewVideo2_frame190.jpg")
+image = cv2.imread("D:/MMichenthaler/Data_15-09-2021_Workspace/NewVideo1/NewVideo1_frame250.jpg")
+holdsPath = 'D:/MMichenthaler/HandOverHold/ScriptTestNewData2/'
+
 # Make a temporary image, will be useful to clear the drawing
 global OrigWidth
 global OrigHeight
@@ -60,10 +63,35 @@ while k!=113:
     image = temp.copy()
     tempHolds = []
     cv2.imshow("Window", image)
-  if (k == 32):               # key press " "
+  if (k == 32):               # key press " "q
     print(holds)
   if (k == 115):              # key press "s"
-    f = open("holds.txt", "w")
-    f.write(str(holds))
+    with open(holdsPath + 'holds2.csv', 'w') as f:
+      # create the csv writer
+      writer = csv.writer(f)
+
+      # write a row to the csv file
+      writer.writerow(holds)
+
+
+with open(holdsPath + "holds2.csv", "r") as file:
+  holdsSt = []
+  stHolds = list(csv.reader(file, delimiter = ','))
+  print(stHolds)
+  for elem in stHolds:
+    for elem2 in elem:
+      elem3 = elem2.replace('[', '')
+      elem4 = elem3.replace(']', '')
+      holdsSt.append(elem4.split(','))
+
+  holds = [list(map(int,rec)) for rec in holdsSt]
+
+
+
+  #for row in csv_reader:
+  #  holds.append(row)
+
+
+print(holds)
 
 cv2.destroyAllWindows()

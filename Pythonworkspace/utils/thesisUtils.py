@@ -4,9 +4,9 @@ from skimage.metrics import structural_similarity
 import numpy as np
 import cv2
 import logging
+import csv
 
-
-def compare_baseline(baseline, img, rect=None):
+def compare_baseline(baseline, img, rect=None):                                             # Auf HSV umstellen?
     if rect is None:
         rect = [0, 0, baseline.shape[1], baseline.shape[0]]
     newBase = baseline.copy()
@@ -17,6 +17,8 @@ def compare_baseline(baseline, img, rect=None):
 
     # Compute SSIM between two images
     (score, diff) = structural_similarity(before_gray, after_gray, full=True)
+
+    ######-------------------------------- Score auch in Pixel umrechnen und einbauen in gegriffen erkennung
     # print("Image similarity", score)
 
     # The diff image contains the actual image differences between the two images
@@ -236,7 +238,7 @@ def mask_colour(img, colorRange):
 
     mask = cv2.inRange(imgHSV, lower, upper)
     imgResult = cv2.bitwise_and(img, img, mask=mask)
-
+    #imgResult = cv2.cvtColor(imgResult, cv2.COLOR_HSV2BGR)
     return imgResult
 # Method to mask image by color
 
@@ -265,7 +267,7 @@ def mark_rectangle(action, x, y, flags, *userdata) :
 #method for marking a rectangle in a window and
 
 
-def hold_marker(image):
+def hold_marker(image, holdsPath):
     #image = cv2.imread("D:\MMichenthaler\VideoFrames\Video2\Video2_frame1000.jpg")
     # Make a temporary image, will be useful to clear the drawing
     global OrigWidth
@@ -296,11 +298,15 @@ def hold_marker(image):
             image = temp.copy()
             cv2.imshow("Window", image)
             tempHolds = []
-        if (k == 32):
+        if (k == 32):                                   # key press " "
             print(tempHolds)
-        if (k == 115):
-            f = open("holds.txt", "w")
-            f.write(str(tempHolds))
+        if (k == 115):                                  # key press "s"
+            with open(holdsPath + 'holds.csv', 'w') as f:
+                # create the csv writer
+                writer = csv.writer(f)
+
+                # write a row to the csv file
+                writer.writerow(tempHolds)
 
     cv2.destroyAllWindows()
     del tempBase
@@ -309,7 +315,11 @@ def hold_marker(image):
     return holds
 
 
+def empty(a):
+    pass
+
 def color_picker(imPath):
+
     imPath = "D:/MMichenthaler/Data_15-09-2021_Workspace/NewVideo1/NewVideo1_frame250.jpg"
     img = cv2.imread(imPath)
     imgResize = cv2.resize(img, (540, 960))
