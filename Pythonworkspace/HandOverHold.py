@@ -1,5 +1,6 @@
 import time
 import os
+from timeit import default_timer as timer
 #from datetime import datetime
 import datetime
 from absl import app, flags, logging
@@ -19,6 +20,9 @@ from yolov3_tf2.utils import draw_persons
 from utils.thesisUtils import *
 
 logging.basicConfig(level=logging.INFO)
+
+
+
 
 ########################################################################################################################
 ############################# First test of combining Methods to detect a gripped hold #################################
@@ -50,7 +54,10 @@ flags.DEFINE_string('vidFile', None, 'path to input Video')
 # flags.DEFINE_string('tfrecord', None, 'tfrecord instead of image')
 flags.DEFINE_string('baseline', None, 'Baseline Image of Wall without the climber')  # Baseline Image of Wall without the climber
 flags.DEFINE_integer('delay', 120, 'Delay for comparison baseline')
+flags.DEFINE_integer('frameReduction', 10, 'Reduction of used frames by the factor')
 flags.DEFINE_float('similarity', 0.5, 'Similarity percent under which a Hold is declared gripped')
+flags.DEFINE_float('holdOverlap', 0.5, 'Similarity percent under which a Hold is declared gripped')
+flags.DEFINE_integer('handPix', 2000, 'approximate hand size in pixel')
 flags.DEFINE_list('holdColor', None, 'if you already know your color values you can put them in here')
 
 
@@ -65,7 +72,7 @@ flags.DEFINE_boolean('colorMask', False, 'do you want to apply a color mask for 
 flags.DEFINE_string('output', './output.jpg', 'path to output image')
 flags.DEFINE_string('holdsOut', ' ', 'path to output image')
 flags.DEFINE_string('numberedSource', ' ', 'path to numbered images')
-flags.DEFINE_string('holdsCSV', ' ', 'path where the file containing the holds will be stored')
+flags.DEFINE_string('CSVpath', ' ', 'path where the file containing the holds will be stored')
 #----------------------for testing purposes
 #basePath = "D:\MMichenthaler\VideoFrames\Video2\Video2_frame1000.jpg"
 #basePath = "D:\MMichenthaler\VideoFrames\Video2\Video2_frame1921.jpg"
@@ -81,7 +88,8 @@ flags.DEFINE_string('holdsCSV', ' ', 'path where the file containing the holds w
 #----------------------------------------------------------------------------------------------------------------------#
 
 def main(_argv):
-    timerStart = time.time()
+    start = timer()
+    #timerStart = time.time()
     #basePath = "D:\MMichenthaler\VideoFrames\Video2\Video2_frame1000.jpg"
     #base = cv2.imread(basePath)
     allClimbers = []
@@ -117,22 +125,22 @@ def main(_argv):
         logging.info('Baseline set and saved to: {}'.format(FLAGS.output) + str(count))
     # using a separate detector for holds on the bare wall image to set a baseline and saving the results
 
-    elif os.path.isfile(FLAGS.holdsCSV + "holds.csv"):
-        with open(FLAGS.holdsCSV + "holds.csv", "r") as file:
+    elif os.path.isfile(FLAGS.CSVpath + "holds.csv"):
+        with open(FLAGS.CSVpath + "holds.csv", "r") as file:
             holdsSt = []
             stHolds = list(csv.reader(file, delimiter=','))
             # print(stHolds)
             for elem in stHolds:
                 for elem2 in elem:
-                    elem3 = elem2.replace('[', '')
-                    elem4 = elem3.replace(']', '')
-                    holdsSt.append(elem4.split(','))
+                    elem3 = elem2.replace('[', '').replace(']', '')
+                    holdsSt.append(elem3.split(','))
 
             holds = [list(map(int, rec)) for rec in holdsSt]
+            logging.info('holds loaded')
 
-    elif FLAGS.baseline and FLAGS.holdsCSV:                        # dieser code ist um die Griffe in einem Gui zu markieren
+    elif FLAGS.baseline and FLAGS.CSVpath:                        # dieser code ist um die Griffe in einem Gui zu markieren
         base = cv2.imread(FLAGS.baseline)
-        holds = hold_marker(base, FLAGS.holdsCSV)
+        holds = hold_marker(base, FLAGS.CSVpath)
         print(holds)
 
 
@@ -213,18 +221,17 @@ def main(_argv):
              [496, 103, 459, 144],
              [514, 180, 560, 216]]
     '''
-    if FLAGS.colorMask is True and FLAGS.holdColor is None:
-        color = color_picker(FLAGS.baseline)
 
-    elif FLAGS.holdColor:
-        color = []
-        for col in FLAGS.holdColor:
-            color.append(int(col))
-            #print(color)
-        #print(color)
+    if os.path.isfile(FLAGS.CSVpath + 'colors.csv') and FLAGS.colorMask is True:
+        with open(FLAGS.CSVpath + 'colors.csv', "r") as file:
+            StColor = list(csv.reader(file, delimiter=','))
+            color = [list(map(int, rec)) for rec in StColor]
+            color = color[0]
+            logging.info('color loaded ' + str(color))
 
 
-
+    elif FLAGS.colorMask is True:
+        color = color_picker(FLAGS.baseline, FLAGS.CSVpath)
 
     if FLAGS.detection is True:
         physical_devices = tf.config.experimental.list_physical_devices('GPU')
@@ -272,7 +279,7 @@ def main(_argv):
             climberCounter = 0
             #for count, dirImg in enumerate(Path(FLAGS.imDir).iterdir()):                    # , key=lambda x: int(x[69:-4]) beim key die anzahl der Zeichen des Paths angeben der vor der nummerierung steht
             for count, dirImg in enumerate(sorted(os.listdir(FLAGS.imDir), key=lambda x: int(x[15:-4]))):
-                climbDetect = False
+                #climbDetect = False
 
                 #img_raw = tf.image.decode_image(
                 #   open(dirImg, 'rb').read(), channels=3)
@@ -302,19 +309,23 @@ def main(_argv):
 
                         climbersThisPic.append(np.array(boxes[0][i]))                           # saving all detected climbers in allclimbers------ für testung auskommentieren PROBLEM mit 2 personen in bild
 
-                       #if climbDetect is False:                                                         #+----
-                       #     cv2.imwrite(FLAGS.numberedSource + str(climberCounter) + '.jpg', img)       #| Mit neuem Datensatz einmal diesen block unkommentiert mitlaufen lassen
-                        #    climbDetect = True                                                          #| dieser Block speichert jeden frame in dem eine Person
-                        #    climberCounter += 1                                                         #| vorkommt einmal nummeriert ab
-                                                                                                         #+----
+                #if climbDetect is False:                            #+----
+                cv2.imwrite(FLAGS.numberedSource + 'PhotoNr_' + str(climberCounter) + '.jpg', img)       #| Mit neuem Datensatz einmal diesen block unkommentiert mitlaufen lassen
+                #climbDetect = True                                                                       #| dieser Block speichert jeden frame nummeriert ab, nicht nur jeden in dem eine person vorkommt,
+                climberCounter += 1                                                                      #| da sonst bei versagen des yolo keine möglichkeit besteht die gegriffen erkennung durchzuführen
+                                                                                                                 #+----
 
                 yOnes = []
                 for j in range(len(climbersThisPic)):
                     #print('\t{}'.format(np.array(climbersThisPic[j][1:2])))
                     yOnes.append(climbersThisPic[j][1:2])
-
-                allClimbers.append(climbersThisPic[np.argmin(yOnes)])                       # die Person mit der BB mit dem geringeren y1 wert, also die die weiter oben ist,
+                if yOnes:
+                    allClimbers.append(climbersThisPic[np.argmin(yOnes)])                    # die Person mit der BB mit dem geringeren y1 wert, also die die weiter oben ist,
                                                                                             # wird als Kletterer in allClimbers gespeichert
+                else:
+                    allClimbers.append([0,0,10e-12,10e-12])
+
+
                 climbersThisPic = []
 
                 # img = draw_outputs(img, (boxes, scores, classes, nums), class_names)
@@ -403,9 +414,10 @@ def main(_argv):
             logging.info('loading hold Nr.' + str(holdID))
 
             for index in range(len(allClimbers)):                                        # -> fläche von hand und überschneidung vergleichen
-                climbImg = cv2.imread(FLAGS.numberedSource + str(index) + '.jpg')
+                climbImg = cv2.imread(FLAGS.numberedSource + 'PhotoNr_' + str(index) + '.jpg')
 
                 climberPix = percToPix(allClimbers[index], cv2.imread(FLAGS.baseline))
+                print(climberPix)
                 r = overlapRect(holds[holdID], climberPix)
 
                 delay = index - FLAGS.delay                                                     #Delay hier bearbeiten
@@ -417,9 +429,9 @@ def main(_argv):
                 if index == 0:
                     base = climbImg.copy()
                 elif index > FLAGS.delay:                                                       #hier auch Delay bearbeiten
-                    base = cv2.imread(FLAGS.numberedSource + str(delay) + '.jpg')
+                    base = cv2.imread(FLAGS.numberedSource + 'PhotoNr_' + str(delay) + '.jpg')
 
-                if abs(rect_area(holds[holdID]) - rect_area(r)) < 10e-12 and (index % 10) == 0:
+                if abs(rect_area(holds[holdID]) - rect_area(r)) < 10e-12 and (index % FLAGS.frameReduction) == 0: # or (index % 600) == 0:
                     olh.append(overlapRect(holds[holdID], climberPix))
                     # print(climbImg)
                     if FLAGS.colorMask is True:
@@ -427,13 +439,23 @@ def main(_argv):
                         base = mask_colour(base, color)
                         climbImg = mask_colour(climbImg, color)
 
-                    allDiff, score = compare_baseline(base, climbImg, holds[holdID])
-                    logging.info('overlap detected: image ' + str(index) + ' and hold ' + str(holdID) + '; image similarity ' + str(score))
+                    allDiff, score, scorePix = compare_baseline(base, climbImg, holds[holdID])
+                    logging.info('overlap detected: image ' + str(index) + ' and hold ' + str(holdID) + '; image similarity ' + str(score) + '; Overlap percent '
+                                 + str((allDiff.shape[1] * allDiff.shape[0]-scorePix)/cv2.countNonZero(cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY))))
                     overlapList = overlapList + '\n overlap detected: image ' + str(index) + 'and hold' + str(holdID) + '; image similarity ' + str(score)
                     cv2.imwrite(FLAGS.holdsOut + str(holdID) + '/gripped_' + str(index) + '.jpg', allDiff)
-                    if score < FLAGS.similarity:                                                     #hier die Similarity
-                        holdList = holdList + " \n hold" +str(holdID)
-                        points += 1
+                    if score < FLAGS.similarity or ((allDiff.shape[1] * allDiff.shape[0]-scorePix)/cv2.countNonZero(cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY))) > FLAGS.holdOverlap \
+                            or (allDiff.shape[1] * allDiff.shape[0]-scorePix) > FLAGS.handPix:
+                        holdList = holdList + " \n hold" #(allDiff.shape[1] * allDiff.shape[0]-scorePix)/cv2.countNonZero(cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY))
+                        print('Size of the hold rectangle: ' + str(allDiff.shape[1] * allDiff.shape[0]))
+                        print('Fremdpixel: ' + str(allDiff.shape[1] * allDiff.shape[0] - scorePix))
+                        print('NonZero Pixel: ' + str(cv2.countNonZero(cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY))))
+                        print('Similarity: ' + str(score))
+                        print('Overlap: '+str((allDiff.shape[1] * allDiff.shape[0] - scorePix) / cv2.countNonZero(
+                            cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY))))
+
+                        if points < holds[holdID][4]:
+                            points = holds[holdID][4]
                         logging.info('progress detected: points = ' + str(points))
                         break
                 else:
@@ -444,10 +466,12 @@ def main(_argv):
     print("Total points: " + str(points))
     # print(holdList)
     # print(overlapList)
-    # print(len(allClimbers))
+    print('Number of detected climbers:' + str(len(allClimbers)))
+    # ...
+    end = timer()
+    #print(end - start)
 
-
-    logging.info('Elapsed time: {}'.format(str(datetime.timedelta((time.time() - timerStart)/1000))))
+    logging.info('Elapsed time: {}'.format(str(datetime.timedelta(seconds=(end - start)))))
 
     #print(np.array(allClimbers))
 

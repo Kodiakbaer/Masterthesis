@@ -5,6 +5,8 @@ import numpy as np
 import cv2
 import logging
 import csv
+import tkinter as tk
+from tkinter import simpledialog
 
 def compare_baseline(baseline, img, rect=None):                                             # Auf HSV umstellen?
     if rect is None:
@@ -17,7 +19,7 @@ def compare_baseline(baseline, img, rect=None):                                 
 
     # Compute SSIM between two images
     (score, diff) = structural_similarity(before_gray, after_gray, full=True)
-
+    ScorePix = (diff.shape[0] * diff.shape[1]) * score
     ######-------------------------------- Score auch in Pixel umrechnen und einbauen in gegriffen erkennung
     # print("Image similarity", score)
 
@@ -44,9 +46,60 @@ def compare_baseline(baseline, img, rect=None):                                 
             #cv2.rectangle(newImg, (x, y), (x + w, y + h), (36, 255, 12), 2)
             cv2.drawContours(mask, [c], 0, (0, 255, 0), -1)
             cv2.drawContours(filled_after, [c], 0, (0, 255, 0), -1)
-
-    return filled_after, score
+    ScorePix = (filled_after.shape[0] * filled_after.shape[1]) * score
+    return filled_after, score, ScorePix
 # Compares Images only in the Area inside the rectangle
+
+
+def compare_baseline_HSV(baseline, img, rect=None):                                             # Auf HSV umstellen?
+    if rect is None:
+        rect = [0, 0, baseline.shape[1], baseline.shape[0]]
+    newBase = baseline.copy()
+    newImg = img.copy()
+    # Convert images to grayscale
+    before_HSV = cv2.cvtColor(newBase[rect[1]:rect[3], rect[0]:rect[2]], cv2.COLOR_BGR2HSV)
+    after_HSV = cv2.cvtColor(newImg[rect[1]:rect[3], rect[0]:rect[2]], cv2.COLOR_BGR2HSV)
+
+
+    # set saturation and value channels to 0
+    before_H = before_HSV[:, :, 0]
+
+    after_H = after_HSV [:, :, 0]
+
+
+    # Compute SSIM between two images
+    (score, diff) = structural_similarity(before_H, after_H, full=True)
+
+
+    ######-------------------------------- Score auch in Pixel umrechnen und einbauen in gegriffen erkennung
+
+    # print("Image similarity", score)
+
+    # The diff image contains the actual image differences between the two images
+    # and is represented as a floating point data type in the range [0,1]
+    # so we must convert the array to 8-bit unsigned integers in the range
+    # [0,255] before we can use it with OpenCV
+    diff = (diff * 255).astype("uint8")
+
+    # Threshold the difference image, followed by finding contours to
+    # obtain the regions of the two input images that differ
+    thresh = cv2.threshold(diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
+    contours = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours = contours[0] if len(contours) == 2 else contours[1]
+
+    mask = np.zeros(newBase.shape, dtype='uint8')
+    filled_after = (newImg[rect[1]:rect[3], rect[0]:rect[2]])
+
+    for c in contours:
+        area = cv2.contourArea(c)
+        if area > 40:
+            x, y, w, h = cv2.boundingRect(c)
+            #cv2.rectangle(newBase, (x, y), (x + w, y + h), (36, 255, 12), 2)
+            #cv2.rectangle(newImg, (x, y), (x + w, y + h), (36, 255, 12), 2)
+            cv2.drawContours(mask, [c], 0, (0, 255, 0), -1)
+            cv2.drawContours(filled_after, [c], 0, (0, 255, 0), -1)
+    ScorePix = (filled_after.shape[0] * filled_after.shape[1]) * score
+    return filled_after, score, ScorePix
 
 
 def pixToPercent(rectPix, img):
@@ -55,11 +108,13 @@ def pixToPercent(rectPix, img):
     return rectPrct
 # Converts Rectangle coordinates from Pixels to Percentage os the respective Image
 
+
 def percToPix(rectPerc, img ):
     w, h = img.shape[1], img.shape[0]
     rectPix = np.array([rectPerc[0]*w, rectPerc[1]*h, rectPerc[2]*w, rectPerc[3]*h])
     return rectPix
 # Converts Rectangle coordinates from Pixels to Percentage os the respective Image
+
 
 def SaltPepperNoise(edgeImg):
 
@@ -262,6 +317,11 @@ def mark_rectangle(action, x, y, flags, *userdata) :
     rect = [int(round(tlc[0] * OrigWidth / 725, 0)), int(round(tlc[1] * OrigHeight / 1288, 0)),
             int(round(brc[0] * OrigWidth / 725, 0)), int(round(brc[1] * OrigHeight / 1288, 0))]
 
+    ROOT = tk.Tk()
+    ROOT.withdraw()
+    USER_INP = simpledialog.askstring(title="Score",
+                                      prompt="Put in the Score for the Hold:")
+    rect.append(int(USER_INP))
     print(rect)
     tempHolds.append(rect)
 #method for marking a rectangle in a window and
@@ -301,6 +361,7 @@ def hold_marker(image, holdsPath):
         if (k == 32):                                   # key press " "
             print(tempHolds)
         if (k == 115):                                  # key press "s"
+            cv2.imwrite(holdsPath+'MarkedHolds.jpg', tempBase)
             with open(holdsPath + 'holds.csv', 'w') as f:
                 # create the csv writer
                 writer = csv.writer(f)
@@ -318,9 +379,9 @@ def hold_marker(image, holdsPath):
 def empty(a):
     pass
 
-def color_picker(imPath):
+def color_picker(imPath, colorPath):
 
-    imPath = "D:/MMichenthaler/Data_15-09-2021_Workspace/NewVideo1/NewVideo1_frame250.jpg"
+    #imPath = "D:/MMichenthaler/Data_15-09-2021_Workspace/NewVideo1/NewVideo1_frame250.jpg"
     img = cv2.imread(imPath)
     imgResize = cv2.resize(img, (540, 960))
     cv2.namedWindow("TrackBars")
@@ -350,7 +411,7 @@ def color_picker(imPath):
         mask = cv2.inRange(imgHSV, lower, upper)
         imgResult = cv2.bitwise_and(imgResize, imgResize, mask=mask)
         # imgVer = np.vstack((imgResize, imgResult))
-
+        lowerUpper = np.array([h_min, s_min, v_min, h_max, s_max, v_max])
         cv2.imshow("Original Image", imgResize)
         # cv2.imshow("HSV Image", imgHSV)
         # cv2.imshow("Mask Image", mask)
@@ -359,7 +420,12 @@ def color_picker(imPath):
         cv2.imshow("Maske", mask)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
+            with open(colorPath + 'colors.csv', 'w') as f:
+                # create the csv writer
+                writer = csv.writer(f)
 
+                # write a row to the csv file
+                writer.writerow(lowerUpper)
             return [h_min, h_max, s_min, s_max, v_min, v_max]
 
 
