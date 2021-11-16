@@ -349,6 +349,10 @@ def hold_marker(image, holdsPath):
 
     k = 0
     # Close the window when key q is pressed
+    label = tk.Label(None, text='Always pick the top left corner first and then the bottom right one', font=('Times', '18'), fg='black')
+    label.pack()
+    label.mainloop()
+
     while k != 113:
         # Display the image
         cv2.imshow("Window", image)
@@ -386,12 +390,12 @@ def color_picker(imPath, colorPath):
     imgResize = cv2.resize(img, (540, 960))
     cv2.namedWindow("TrackBars")
     cv2.resizeWindow("TrackBars", 640, 240)
-    cv2.createTrackbar("Hue Min", "TrackBars", 90, 255, empty)
-    cv2.createTrackbar("Hue Max", "TrackBars", 115, 255, empty)
-    cv2.createTrackbar("Sat Min", "TrackBars", 230, 255, empty)
+    cv2.createTrackbar("Hue Min", "TrackBars", 0, 255, empty)
+    cv2.createTrackbar("Hue Max", "TrackBars", 255, 255, empty)
+    cv2.createTrackbar("Sat Min", "TrackBars", 0, 255, empty)
     cv2.createTrackbar("Sat Max", "TrackBars", 255, 255, empty)
-    cv2.createTrackbar("Val Min", "TrackBars", 25, 255, empty)
-    cv2.createTrackbar("Val Max", "TrackBars", 200, 255, empty)
+    cv2.createTrackbar("Val Min", "TrackBars", 0, 255, empty)
+    cv2.createTrackbar("Val Max", "TrackBars", 255, 255, empty)
 
     while True:
 
@@ -426,6 +430,6 @@ def color_picker(imPath, colorPath):
 
                 # write a row to the csv file
                 writer.writerow(lowerUpper)
-            return [h_min, h_max, s_min, s_max, v_min, v_max]
+            return [h_min, s_min, v_min, h_max, s_max, v_max]
 
 

@@ -221,7 +221,8 @@ def main(_argv):
              [496, 103, 459, 144],
              [514, 180, 560, 216]]
     '''
-
+    # auskommentieren weil flags colormask nicht funktioniert
+    print(FLAGS.colorMask)
     if os.path.isfile(FLAGS.CSVpath + 'colors.csv') and FLAGS.colorMask is True:
         with open(FLAGS.CSVpath + 'colors.csv', "r") as file:
             StColor = list(csv.reader(file, delimiter=','))
@@ -309,10 +310,10 @@ def main(_argv):
 
                         climbersThisPic.append(np.array(boxes[0][i]))                           # saving all detected climbers in allclimbers------ für testung auskommentieren PROBLEM mit 2 personen in bild
 
-                #if climbDetect is False:                            #+----
-                cv2.imwrite(FLAGS.numberedSource + 'PhotoNr_' + str(climberCounter) + '.jpg', img)       #| Mit neuem Datensatz einmal diesen block unkommentiert mitlaufen lassen
-                #climbDetect = True                                                                       #| dieser Block speichert jeden frame nummeriert ab, nicht nur jeden in dem eine person vorkommt,
-                climberCounter += 1                                                                      #| da sonst bei versagen des yolo keine möglichkeit besteht die gegriffen erkennung durchzuführen
+                                                                                                         #if climbDetect is False:                            #+----
+                #cv2.imwrite(FLAGS.numberedSource + 'PhotoNr_' + str(climberCounter) + '.jpg', img)       #| Mit neuem Datensatz einmal diesen block unkommentiert mitlaufen lassen
+                #DIESE ZEILEN FÜR NUMBERED                                                            #| dieser Block speichert jeden frame nummeriert ab, nicht nur jeden in dem eine person vorkommt,
+                #climberCounter += 1                                                                      #| da sonst bei versagen des yolo keine möglichkeit besteht die gegriffen erkennung durchzuführen
                                                                                                                  #+----
 
                 yOnes = []
@@ -417,7 +418,7 @@ def main(_argv):
                 climbImg = cv2.imread(FLAGS.numberedSource + 'PhotoNr_' + str(index) + '.jpg')
 
                 climberPix = percToPix(allClimbers[index], cv2.imread(FLAGS.baseline))
-                print(climberPix)
+                #print(climberPix)
                 r = overlapRect(holds[holdID], climberPix)
 
                 delay = index - FLAGS.delay                                                     #Delay hier bearbeiten
@@ -434,7 +435,7 @@ def main(_argv):
                 if abs(rect_area(holds[holdID]) - rect_area(r)) < 10e-12 and (index % FLAGS.frameReduction) == 0: # or (index % 600) == 0:
                     olh.append(overlapRect(holds[holdID], climberPix))
                     # print(climbImg)
-                    if FLAGS.colorMask is True:
+                    if FLAGS.colorMask is True:                        #WIEDER EINKOMMENTIEREN
                         #img = cv2.imread(str(climbImg))
                         base = mask_colour(base, color)
                         climbImg = mask_colour(climbImg, color)
@@ -443,7 +444,7 @@ def main(_argv):
                     logging.info('overlap detected: image ' + str(index) + ' and hold ' + str(holdID) + '; image similarity ' + str(score) + '; Overlap percent '
                                  + str((allDiff.shape[1] * allDiff.shape[0]-scorePix)/cv2.countNonZero(cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY))))
                     overlapList = overlapList + '\n overlap detected: image ' + str(index) + 'and hold' + str(holdID) + '; image similarity ' + str(score)
-                    cv2.imwrite(FLAGS.holdsOut + str(holdID) + '/gripped_' + str(index) + '.jpg', allDiff)
+                    cv2.imwrite(FLAGS.holdsOut + str(holdID) + '/overlapping_' + str(index) + '.jpg', allDiff)
                     if score < FLAGS.similarity or ((allDiff.shape[1] * allDiff.shape[0]-scorePix)/cv2.countNonZero(cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY))) > FLAGS.holdOverlap \
                             or (allDiff.shape[1] * allDiff.shape[0]-scorePix) > FLAGS.handPix:
                         holdList = holdList + " \n hold" #(allDiff.shape[1] * allDiff.shape[0]-scorePix)/cv2.countNonZero(cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY))
@@ -453,6 +454,7 @@ def main(_argv):
                         print('Similarity: ' + str(score))
                         print('Overlap: '+str((allDiff.shape[1] * allDiff.shape[0] - scorePix) / cv2.countNonZero(
                             cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY))))
+                        cv2.imwrite(FLAGS.holdsOut + str(holdID) + '/gripped_' + str(index) + '.jpg', allDiff)
 
                         if points < holds[holdID][4]:
                             points = holds[holdID][4]
@@ -477,79 +479,13 @@ def main(_argv):
 
 
 #----------------------for testing purposes
-    '''   verschneidungstest von mehrern hand rechtecken mit einem griff rechteck 
-    allhands = [[0.41006285, 0.42347014, 0.7614191, 0.8621985],
-                [0.409926, 0.42104656, 0.7612273, 0.86492175],
-                [0.4092157, 0.41622725, 0.76479065, 0.8680327],
-                [0.41460437, 0.41787606, 0.7606239, 0.86354953],
-                [0.41505966, 0.41920617, 0.76014113, 0.86396134],
-                [0.4183203, 0.41473258, 0.75801873, 0.8666041],
-                [0.4192586, 0.42035326, 0.75870824, 0.86138284],
-                [0.41785425, 0.42000327, 0.7576223, 0.85765004],
-                [0.41965738, 0.41426432, 0.7552775, 0.8637074],
-                [0.4204809, 0.4154017, 0.7525857, 0.8634217],
-                [0.4196638, 0.41141456, 0.7530681, 0.86506754],
-                [0.41827935, 0.415114, 0.75403935, 0.86354786],
-                [0.41740987, 0.41588917, 0.7541821, 0.8621843],
-                [0.4160223, 0.41886348, 0.75506985, 0.86216277],
-                [0.41614324, 0.4168234, 0.7540466, 0.8606248],
-                [0.41635805, 0.42132342, 0.75407976, 0.85889864],
-                [0.41341496, 0.42059684, 0.75582683, 0.8633392],
-                [0.415411, 0.41905028, 0.75331414, 0.8632632],
-                [0.4156507, 0.4216166, 0.7545028, 0.86404556],
-                [0.41548878, 0.4221872, 0.754783, 0.8620622],
-                [0.42002618, 0.4221908, 0.7520453, 0.8624232],
-                [0.41660357, 0.42034984, 0.7518734, 0.86518073],
-                [0.4169307, 0.41948748, 0.75159836, 0.86633277],
-                [0.41918078, 0.42060584, 0.7498467, 0.8665597],
-                [0.41915, 0.41995704, 0.74960124, 0.86642694],
-                [0.41898906, 0.41726893, 0.7476455, 0.86694056],
-                [0.41848812, 0.41325915, 0.74770606, 0.87038124]]
-    print(base.shape)
-    baseRectPercent = pixToPercent(baseRect, base)
-    baseArea = rect_area(baseRectPercent)
-    
-    
-    for i in range(len(allhands)):
-        detectArea = rect_area(overlapRect(np.array(allhands[i]), baseRectPercent))
 
-        if detectArea == baseArea:
-            compRes, score = compare_baseline(base, cv2.imread(FLAGS.output+str(i)+'.jpg'), baseRect)
-            print(score)
-            cv2.imwrite(FLAGS.output+str(i)+'baseComparison.jpg', compRes)
-        else:
-            print("oh no!")
-       test = cv2.imread("D:\MMichenthaler\HandOverHold\In\BilddifferenzTestung\Frames\Video2_frame1947.jpg")
-    cv2.imshow("base1", base)
-    cv2.imshow("test1", test)
-    Diff, sc = compare_baseline(base, test)
-
-    cv2.imshow("test", Diff)
-    cv2.imshow("base", base)
-    cv2.imshow("compare", test)
-    cv2.waitKey(0)
-    '''
 
 
 
     #holds = []
     #holds = hold_marker(base)
     #print(holds)
-
-    '''Test loop für bilddifferenzen in rechteck
-    for count, dirImg in enumerate(Path(FLAGS.imDir).iterdir()):
-        print(dirImg)
-        if count == 0 or (count % 60) == 0:
-            base = cv2.imread(str(dirImg))
-        img = cv2.imread(str(dirImg))
-        baseMasked = mask_colour(base, color)
-        imgMasked =  mask_colour(img, color)
-        allDiff, score = compare_baseline(baseMasked, imgMasked, baseRect)
-
-        cv2.imwrite(FLAGS.output + str(count) + '.jpg', allDiff)
-        print(count)
-        print(score)                #vielleicht anhand von score als gegriffen zählen -> nicht mehr stark verändernd und ähnlichkeit unter gewissem wert
-    '''
 
 
 

@@ -20,13 +20,13 @@ from yolov3_tf2.utils import draw_persons
 from utils.thesisUtils import *
 
 
-imPath = "D:/MMichenthaler/HandOverHold/NewDataVideo4Numbered/PhotoNr_9570.jpg"
-imPath2 = "D:/MMichenthaler/HandOverHold/NewDataVideo4Numbered/PhotoNr_9690.jpg"
+imPath = "D:/MMichenthaler/HandOverHold/NewDataVideo8Numbered/PhotoNr_220.jpg"
+imPath2 = "D:/MMichenthaler/HandOverHold/NewDataVideo8Numbered/PhotoNr_340.jpg"
 img1 = cv2.imread(imPath)
 img2 = cv2.imread(imPath2)
 #img = tf.expand_dims(img, 0)
-rect = np.array([436, 39, 463, 66, 40])
-color = [26,0,0,103,255,160]
+rect = np.array([632, 1430, 661, 1461, 2])
+color = [31,23,43,93,255,233]
 
 #roi = np.array(img[rect[1]:rect[3], rect[0]:rect[2]])
 
@@ -52,21 +52,24 @@ cv2.imshow("test2", img2Masked)
 '''
 #img1HSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 #img2HSV = cv2.cvtColor(img2, cv2.COLOR_BGR2HSV)
-
+#label = tk.Label(None, text='Always pick the top left Corner first and then the bottom right one', font=('Times', '18'),
+#                 fg='black')
+#label.pack()
+#label.mainloop()
 
 img1Masked = mask_colour(img1, color)
 #print(img1Masked)
 img2Masked = mask_colour(img2, color)
-cv2.imshow("test1", img1Masked)
-cv2.imshow("test2", img2Masked)
-allDiff, score, scorePix = compare_baseline(img1, img2,rect)
+#cv2.imshow("test1", img1Masked)
+#cv2.imshow("test2", img2Masked)
+allDiff, score, scorePix = compare_baseline(img1Masked, img2Masked, rect)
 #allDiff = cv2.resize(allDiff, (725, 1288), interpolation=cv2.INTER_AREA)
 cv2.imshow("All Differences via greyascale", allDiff)
 print(str(allDiff.shape[1] * allDiff.shape[0]))
 print('Fremdpixel: ' + str((allDiff.shape[1] * allDiff.shape[0])-scorePix))
 print('NonZero Pixel: ' + str(cv2.countNonZero(cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY))))
-print((allDiff.shape[1] * allDiff.shape[0]-scorePix)/cv2.countNonZero(cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY)))
-print(score)
+print('overlap: ' + str((allDiff.shape[1] * allDiff.shape[0]-scorePix)/cv2.countNonZero(cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY))))
+print('similiarity: ' + str(score))
 
 
 
