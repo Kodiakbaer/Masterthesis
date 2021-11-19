@@ -16,10 +16,19 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="70eee28b-38d1-4623-a1e3-d65267f6b42f" name="Default Changelist" comment="maybe they are gone" />
+    <list default="true" id="70eee28b-38d1-4623-a1e3-d65267f6b42f" name="Default Changelist" comment="maybe they are gone2">
+      <change afterPath="$PROJECT_DIR$/HoldAnalyser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_09_2020_15_53__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_24_09_2020_15_53__Default_Changelist_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,6 +43,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RESET_MODE" value="MIXED" />
   </component>
   <component name="ProjectId" id="1aOST3iFGiNRRKsC3GEQmolbz0X" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -60,7 +70,7 @@
       <recent name="D:\Studium\Master\MasterArbeit\GitHubRepository\Masterthesis\Pythonworkspace\Resources\haarcascades" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.ExtractionTest">
+  <component name="RunManager" selected="Python.HoldAnalyser">
     <configuration name="CascadeTester" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PythonWorkspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -105,6 +115,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="HoldAnalyser" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PythonWorkspace" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HoldAnalyser.py" />
+      <option name="PARAMETERS" value="--CSVpath D:\Studium\Master\MasterArbeit\GitHubRepository\Masterthesis\Pythonworkspace\Resources\holdLists\holdsVid5.csv" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="OpenCVChapter5" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PythonWorkspace" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -119,28 +151,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/OpenCVChapter5.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Project2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="PythonWorkspace" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Project2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -193,13 +203,21 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.PythonMasterThesis" />
+      <item itemvalue="Python.CascadeTester" />
+      <item itemvalue="Python.ExtractionTest" />
+      <item itemvalue="Python.HoldAnalyser" />
+      <item itemvalue="Python.OpenCVChapter5" />
+      <item itemvalue="Python.Project3" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.HoldAnalyser" />
         <item itemvalue="Python.ExtractionTest" />
         <item itemvalue="Python.CascadeTester" />
         <item itemvalue="Python.OpenCVChapter5" />
         <item itemvalue="Python.Project3" />
-        <item itemvalue="Python.Project2" />
       </list>
     </recent_temporary>
   </component>
@@ -239,7 +257,14 @@
       <workItem from="1603880385312" duration="875000" />
       <workItem from="1606604821727" duration="1033000" />
       <workItem from="1606674969144" duration="3580000" />
-      <workItem from="1628098205411" duration="749000" />
+      <workItem from="1628098205411" duration="1773000" />
+      <workItem from="1628238416077" duration="1342000" />
+      <workItem from="1628616289613" duration="685000" />
+      <workItem from="1628867305804" duration="146000" />
+      <workItem from="1633693774117" duration="426000" />
+      <workItem from="1634424076473" duration="631000" />
+      <workItem from="1637081756749" duration="884000" />
+      <workItem from="1637156057566" duration="6366000" />
     </task>
     <task id="LOCAL-00001" summary="This is a Test commit for my Python file">
       <created>1598879594831</created>
@@ -318,7 +343,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628098294207</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="maybe they are gone2">
+      <created>1628099230483</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1628099230483</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,13 +375,38 @@
     <MESSAGE value="Commit of Project1.py" />
     <MESSAGE value="created cascade dir and cascade tester" />
     <MESSAGE value="maybe they are gone" />
-    <option name="LAST_COMMIT_MESSAGE" value="maybe they are gone" />
+    <MESSAGE value="maybe they are gone2" />
+    <option name="LAST_COMMIT_MESSAGE" value="maybe they are gone2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="872" y="429" key="Vcs.Push.Dialog.v2" timestamp="1628098329127">
+    <state x="734" y="355" width="1681" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1637162896135">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="872" y="429" key="Vcs.Push.Dialog.v2/0.0.2560.1400@0.0.2560.1400" timestamp="1628098329127" />
+    <state x="734" y="355" width="1681" height="690" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1637162896135" />
+    <state width="2517" height="382" key="GridCell.Tab.0.bottom" timestamp="1637163737869">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="382" key="GridCell.Tab.0.bottom/0.0.2560.1400@0.0.2560.1400" timestamp="1637163737869" />
+    <state width="2517" height="382" key="GridCell.Tab.0.center" timestamp="1637163737869">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="382" key="GridCell.Tab.0.center/0.0.2560.1400@0.0.2560.1400" timestamp="1637163737869" />
+    <state width="2517" height="382" key="GridCell.Tab.0.left" timestamp="1637163737869">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="382" key="GridCell.Tab.0.left/0.0.2560.1400@0.0.2560.1400" timestamp="1637163737869" />
+    <state width="2517" height="382" key="GridCell.Tab.0.right" timestamp="1637163737869">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state width="2517" height="382" key="GridCell.Tab.0.right/0.0.2560.1400@0.0.2560.1400" timestamp="1637163737869" />
+    <state x="115" y="122" width="2391" height="1211" key="MergeDialog" timestamp="1637082030366">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="115" y="122" width="2391" height="1211" key="MergeDialog/0.0.2560.1400@0.0.2560.1400" timestamp="1637082030366" />
+    <state x="1087" y="610" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1637157997176">
+      <screen x="0" y="0" width="2560" height="1400" />
+    </state>
+    <state x="1087" y="610" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.2560.1400@0.0.2560.1400" timestamp="1637157997176" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter8.coverage" NAME="OpenCVChapter8 Coverage Results" MODIFIED="1600865574278" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -365,6 +422,7 @@
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter6.coverage" NAME="OpenCVChapter6 Coverage Results" MODIFIED="1600801180260" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter2__1_.coverage" NAME="OpenCVChapter2 (1) Coverage Results" MODIFIED="1600788382201" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter4.coverage" NAME="OpenCVChapter4 Coverage Results" MODIFIED="1600791636241" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Pythonworkspace$HoldAnalyser.coverage" NAME="HoldAnalyser Coverage Results" MODIFIED="1637163114624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter9.coverage" NAME="OpenCVChapter9 Coverage Results" MODIFIED="1600948720084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$OpenCVChapter1.coverage" NAME="OpenCVChapter1 Coverage Results" MODIFIED="1600785518497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Pythonworkspace$Project3.coverage" NAME="Project3 Coverage Results" MODIFIED="1601124459491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
