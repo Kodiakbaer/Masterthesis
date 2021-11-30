@@ -55,8 +55,8 @@ flags.DEFINE_string('vidFile', None, 'path to input Video')
 flags.DEFINE_string('baseline', None, 'Baseline Image of Wall without the climber')  # Baseline Image of Wall without the climber
 flags.DEFINE_integer('delay', 120, 'Delay for comparison baseline')
 flags.DEFINE_integer('frameReduction', 10, 'Reduction of used frames by the factor')
-flags.DEFINE_float('similarity', 0.5, 'Similarity percent under which a Hold is declared gripped')
-flags.DEFINE_float('holdOverlap', 0.5, 'Similarity percent under which a Hold is declared gripped')
+flags.DEFINE_float('similarity', 0.6, 'Similarity percent under which a Hold is declared gripped')
+flags.DEFINE_float('holdOverlap', 0.9, 'Similarity percent under which a Hold is declared gripped')
 flags.DEFINE_integer('handPix', 2000, 'approximate hand size in pixel')
 flags.DEFINE_list('holdColor', None, 'if you already know your color values you can put them in here')
 
@@ -67,6 +67,7 @@ flags.DEFINE_boolean('holdsDetection', False, 'Hold detection Yes or No')
 flags.DEFINE_boolean('cam', False, 'is a cam used?')
 flags.DEFINE_boolean('video', False, 'is a video as a file or cam feed used?')
 flags.DEFINE_boolean('colorMask', False, 'do you want to apply a color mask for the baseline comaprison?')
+
 
 ###################### outputs ######################
 flags.DEFINE_string('output', './output.jpg', 'path to output image')
@@ -96,7 +97,7 @@ def main(_argv):
     climbersThisPic = []
     #holds = hold_marker(base)
     #print(holds)
-
+    print(FLAGS.colorMask)
     #------------------------------------------
     # Dieser Part ist für die Detection mittels Yolo, da das nicht ausreichend funktioniert wird er hier nun bis auf 
     # weiteres auskommentiert gelassen
@@ -278,8 +279,9 @@ def main(_argv):
 
         if FLAGS.imDir:                                                 # für Detection auf allen bildern in imDir
             climberCounter = 0
+            makeNumbered = False
             #for count, dirImg in enumerate(Path(FLAGS.imDir).iterdir()):                    # , key=lambda x: int(x[69:-4]) beim key die anzahl der Zeichen des Paths angeben der vor der nummerierung steht
-            for count, dirImg in enumerate(sorted(os.listdir(FLAGS.imDir), key=lambda x: int(x[15:-4]))):
+            for count, dirImg in enumerate(sorted(os.listdir(FLAGS.imDir), key=lambda x: int(x[16:-4]))): # ANPASSEN WENN UNTER ODER ÜBER 10 auf 16
                 #climbDetect = False
 
                 #img_raw = tf.image.decode_image(
@@ -305,15 +307,16 @@ def main(_argv):
                     logging.info('\t{}, {}, {}'.format(class_names[int(classes[0][i])],
                                                        np.array(scores[0][i]),
                                                        np.array(boxes[0][i])))
-                    if class_names[int(classes[0][i])] == "person" and scores[0][i] > 0.6:
+                    if class_names[int(classes[0][i])] == "person":
 
 
                         climbersThisPic.append(np.array(boxes[0][i]))                           # saving all detected climbers in allclimbers------ für testung auskommentieren PROBLEM mit 2 personen in bild
 
-                                                                                                         #if climbDetect is False:                            #+----
-                #cv2.imwrite(FLAGS.numberedSource + 'PhotoNr_' + str(climberCounter) + '.jpg', img)       #| Mit neuem Datensatz einmal diesen block unkommentiert mitlaufen lassen
-                #DIESE ZEILEN FÜR NUMBERED                                                            #| dieser Block speichert jeden frame nummeriert ab, nicht nur jeden in dem eine person vorkommt,
-                #climberCounter += 1                                                                      #| da sonst bei versagen des yolo keine möglichkeit besteht die gegriffen erkennung durchzuführen
+                if not os.listdir(FLAGS.numberedSource) or makeNumbered is True:
+                    makeNumbered = True                                                                                        #if climbDetect is False:                            #+----
+                    cv2.imwrite(FLAGS.numberedSource + 'PhotoNr_' + str(climberCounter) + '.jpg', img)       #| Mit neuem Datensatz einmal diesen block unkommentiert mitlaufen lassen
+                    #DIESE ZEILEN FÜR NUMBERED                                                            #| dieser Block speichert jeden frame nummeriert ab, nicht nur jeden in dem eine person vorkommt,
+                    climberCounter += 1                                                                      #| da sonst bei versagen des yolo keine möglichkeit besteht die gegriffen erkennung durchzuführen
                                                                                                                  #+----
 
                 yOnes = []
@@ -403,7 +406,7 @@ def main(_argv):
 
     # 13.08.2021 diese schleife modifizieren um in der richtigen reihenfolge über griffe und bilder zu loopen
     # -> auf überschneidung von griffen und personen boundingboxes achten -> nur dann differenzen berechnen
-    print(str(allClimbers))
+    #print(str(allClimbers))
 
     olh = []  # overlapping hands
     points = 0

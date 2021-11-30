@@ -20,13 +20,13 @@ from yolov3_tf2.utils import draw_persons
 from utils.thesisUtils import *
 
 
-imPath = "D:/MMichenthaler/HandOverHold/NewDataVideo8Numbered/PhotoNr_220.jpg"
-imPath2 = "D:/MMichenthaler/HandOverHold/NewDataVideo8Numbered/PhotoNr_340.jpg"
+imPath = "D:/MMichenthaler/HandOverHold/NewDataVideo11Numbered/PhotoNr_645.jpg"
+imPath2 = "D:/MMichenthaler/HandOverHold/NewDataVideo11Numbered/PhotoNr_765.jpg"
 img1 = cv2.imread(imPath)
 img2 = cv2.imread(imPath2)
 #img = tf.expand_dims(img, 0)
-rect = np.array([632, 1430, 661, 1461, 2])
-color = [31,23,43,93,255,233]
+rect = np.array([1081, 2832, 1147, 2901, 6])
+color = [120,0,41,174,133,225]
 
 #roi = np.array(img[rect[1]:rect[3], rect[0]:rect[2]])
 
