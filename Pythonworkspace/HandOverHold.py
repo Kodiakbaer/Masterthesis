@@ -340,6 +340,13 @@ def main(_argv):
 
             f = open("climbers.txt", "w")
             f.write(str(allClimbers))
+            with open(FLAGS.CSVpath + 'time.csv', 'w') as f:
+                # create the csv writer
+                t1 = time.time()
+                writer = csv.writer(f)
+                t2 = time.time()
+                # write a row to the csv file
+                writer.writerow('time: {}'.format(t2 - t1))
 
 #------------------------------------------------------------------------------------------ momentan nicht in verwendung
         elif FLAGS.video is True:                                   # für Detection am cam feed oder uaf dem Video allen
@@ -448,8 +455,8 @@ def main(_argv):
                                  + str((allDiff.shape[1] * allDiff.shape[0]-scorePix)/cv2.countNonZero(cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY))))
                     overlapList = overlapList + '\n overlap detected: image ' + str(index) + 'and hold' + str(holdID) + '; image similarity ' + str(score)
                     cv2.imwrite(FLAGS.holdsOut + str(holdID) + '/overlapping_' + str(index) + '.jpg', allDiff)
-                    if score < FLAGS.similarity or ((allDiff.shape[1] * allDiff.shape[0]-scorePix)/cv2.countNonZero(cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY))) > FLAGS.holdOverlap \
-                            or (allDiff.shape[1] * allDiff.shape[0]-scorePix) > FLAGS.handPix:
+                    if score < FLAGS.similarity: #or ((allDiff.shape[1] * allDiff.shape[0]-scorePix)/cv2.countNonZero(cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY))) > FLAGS.holdOverlap \
+                            #or (allDiff.shape[1] * allDiff.shape[0]-scorePix) > FLAGS.handPix !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! test ohne komische conversion
                         holdList = holdList + " \n hold" #(allDiff.shape[1] * allDiff.shape[0]-scorePix)/cv2.countNonZero(cv2.cvtColor(allDiff, cv2.COLOR_BGR2GRAY))
                         print('Size of the hold rectangle: ' + str(allDiff.shape[1] * allDiff.shape[0]))
                         print('Fremdpixel: ' + str(allDiff.shape[1] * allDiff.shape[0] - scorePix))

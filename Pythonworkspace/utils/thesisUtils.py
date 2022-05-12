@@ -322,6 +322,8 @@ def mark_rectangle(action, x, y, flags, *userdata) :
     USER_INP = simpledialog.askstring(title="Score",
                                       prompt="Put in the Score for the Hold:")
     rect.append(int(USER_INP))
+    cv2.putText(tempBase, str(int(USER_INP)-1),
+                top_left_corner[0], cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, (0, 0, 255), 2)
     print(rect)
     tempHolds.append(rect)
 #method for marking a rectangle in a window and

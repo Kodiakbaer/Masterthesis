@@ -6,26 +6,29 @@ def empty(a):
     pass
 
 
-imPath = "D:/MMichenthaler/Data_15-09-2021_Workspace/NewVideo1/NewVideo1_frame250.jpg"
-colorPath = 'D:/MMichenthaler/HandOverHold/ScriptTestNewData2/'
+imPath = "D:/MMichenthaler/Data_15-09-2021_Workspace/NewVideo10/NewVideo10_frame600.jpg"
+colorPath = 'D:/MMichenthaler/HandOverHold/ScriptTestNewData10/'
 img = cv2.imread(imPath)
+#rect = np.array([1073, 2063, 1213, 2206,])
+#img = img[rect[1]:rect[3], rect[0]:rect[2]]
 imgResize = cv2.resize(img, (540, 960))
 cv2.namedWindow("TrackBars")
 cv2.resizeWindow("TrackBars", 640,240)
-
+#rect = np.array([577, 1031, 623, 1074])
+'''
 with open(colorPath + 'colors.csv', "r") as file:
     StColor = list(csv.reader(file, delimiter=','))
     colorInt = [list(map(int, rec)) for rec in StColor]
     colorInt = colorInt[0]
     print(colorInt)
-
+'''
     # print(stHolds)
-cv2.createTrackbar("Hue Min", "TrackBars", 90, 255, empty)
-cv2.createTrackbar("Hue Max", "TrackBars", 115, 255, empty)
-cv2.createTrackbar("Sat Min", "TrackBars", 230, 255, empty)
+cv2.createTrackbar("Hue Min", "TrackBars", 98, 255, empty)
+cv2.createTrackbar("Hue Max", "TrackBars", 114, 255, empty)
+cv2.createTrackbar("Sat Min", "TrackBars", 34, 255, empty)
 cv2.createTrackbar("Sat Max", "TrackBars", 255, 255, empty)
-cv2.createTrackbar("Val Min", "TrackBars", 25, 255, empty)
-cv2.createTrackbar("Val Max", "TrackBars", 200, 255, empty)
+cv2.createTrackbar("Val Min", "TrackBars", 31, 255, empty)
+cv2.createTrackbar("Val Max", "TrackBars", 212, 255, empty)
 
 while True:
 
